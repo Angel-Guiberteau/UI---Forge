@@ -73,6 +73,7 @@ export type ThemeProject = {
   createdAt: string
   updatedAt: string
   activeMode: ThemeMode
+  basePresetId: string
   originPresetId: string | null
   themes: ThemePair
 }
@@ -86,10 +87,12 @@ export type ThemePreset = {
 
 export type ThemeCategory = keyof ThemeTokens
 
+export type ThemeEditorSection = 'presets' | ThemeCategory
+
 export type ThemeEditorState = {
   project: ThemeProject
   past: ThemeProject[]
   future: ThemeProject[]
   viewport: PreviewViewport
-  selectedCategory: ThemeCategory
+  selectedSection: ThemeEditorSection
 }

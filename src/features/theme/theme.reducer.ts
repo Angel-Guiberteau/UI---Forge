@@ -8,6 +8,7 @@ import type {
   SpacingTokens,
   ThemeCategory,
   ThemeEditorState,
+  ThemeEditorSection,
   ThemeMode,
   ThemePreset,
   ThemeProject,
@@ -28,12 +29,13 @@ export type ThemeEditorAction =
   | TokenUpdateAction
   | { type: 'project/rename'; name: string; updatedAt: string }
   | { type: 'project/apply-preset'; preset: ThemePreset; updatedAt: string }
+  | { type: 'project/reset-section'; preset: ThemePreset; mode: ThemeMode; section: ThemeCategory; updatedAt: string }
   | { type: 'project/replace'; project: ThemeProject }
   | { type: 'history/undo' }
   | { type: 'history/redo' }
   | { type: 'view/set-mode'; mode: ThemeMode }
   | { type: 'view/set-viewport'; viewport: PreviewViewport }
-  | { type: 'view/set-category'; category: ThemeCategory }
+  | { type: 'view/set-section'; section: ThemeEditorSection }
 
 export const createInitialThemeEditorState = (
   project: ThemeProject = createThemeProject(),
@@ -42,7 +44,7 @@ export const createInitialThemeEditorState = (
   past: [],
   future: [],
   viewport: 'desktop',
-  selectedCategory: 'colors',
+  selectedSection: 'presets',
 })
 
 const addToHistory = (
@@ -106,8 +108,24 @@ export const themeEditorReducer = (
       return addToHistory(state, {
         ...state.project,
         updatedAt: action.updatedAt,
+        basePresetId: action.preset.id,
         originPresetId: action.preset.id,
         themes: cloneThemePair(action.preset.themes),
+      })
+    case 'project/reset-section':
+      return addToHistory(state, {
+        ...state.project,
+        updatedAt: action.updatedAt,
+        originPresetId: null,
+        themes: {
+          ...state.project.themes,
+          [action.mode]: {
+            ...state.project.themes[action.mode],
+            [action.section]: structuredClone(
+              action.preset.themes[action.mode][action.section],
+            ),
+          },
+        },
       })
     case 'project/replace':
       return createInitialThemeEditorState(action.project)
@@ -142,7 +160,7 @@ export const themeEditorReducer = (
       }
     case 'view/set-viewport':
       return { ...state, viewport: action.viewport }
-    case 'view/set-category':
-      return { ...state, selectedCategory: action.category }
+    case 'view/set-section':
+      return { ...state, selectedSection: action.section }
   }
 }

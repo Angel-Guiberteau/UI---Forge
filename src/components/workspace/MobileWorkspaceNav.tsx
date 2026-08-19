@@ -1,6 +1,6 @@
 import { Icon } from '../ui/Icon'
 
-export type MobileWorkspaceView = 'presets' | 'preview'
+export type MobileWorkspaceView = 'design' | 'preview'
 
 type MobileWorkspaceNavProps = {
   view: MobileWorkspaceView
@@ -11,11 +11,11 @@ export const MobileWorkspaceNav = ({ view, onChange }: MobileWorkspaceNavProps) 
   <nav className="mobile-workspace-nav" aria-label="Workspace sections">
     <button
       type="button"
-      aria-current={view === 'presets' ? 'page' : undefined}
-      onClick={() => onChange('presets')}
+      aria-current={view === 'design' ? 'page' : undefined}
+      onClick={() => onChange('design')}
     >
       <Icon name="palette" />
-      Presets
+      Design
     </button>
     <button
       type="button"

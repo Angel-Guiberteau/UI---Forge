@@ -1,10 +1,10 @@
 import type { ThemeProject } from './theme.types'
 
 const STORAGE_KEY = 'ui-forge:workspace'
-const STORAGE_VERSION = 1
+const STORAGE_VERSION = 2
 
 type StoredWorkspace = {
-  version: typeof STORAGE_VERSION
+  version: number
   project: ThemeProject
 }
 
@@ -26,6 +26,11 @@ const isThemeProject = (value: unknown): value is ThemeProject => {
   )
 }
 
+const migrateThemeProject = (project: ThemeProject): ThemeProject => ({
+  ...project,
+  basePresetId: project.basePresetId ?? project.originPresetId ?? 'minimal',
+})
+
 export const loadThemeProject = (
   storage: StorageAdapter,
 ): ThemeProject | null => {
@@ -38,8 +43,10 @@ export const loadThemeProject = (
 
     const workspace = JSON.parse(storedValue) as Partial<StoredWorkspace>
 
-    return workspace.version === STORAGE_VERSION && isThemeProject(workspace.project)
-      ? workspace.project
+    const canMigrate = workspace.version === 1 || workspace.version === STORAGE_VERSION
+
+    return canMigrate && isThemeProject(workspace.project)
+      ? migrateThemeProject(workspace.project)
       : null
   } catch {
     return null

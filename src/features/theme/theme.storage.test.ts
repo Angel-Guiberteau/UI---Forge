@@ -32,4 +32,21 @@ describe('theme storage', () => {
 
     expect(loadThemeProject(storage)).toBeNull()
   })
+
+  it('migrates version one projects with a stable base preset', () => {
+    const storage = new MemoryStorage()
+    const project = createThemeProject(undefined, {
+      id: 'project-1',
+      timestamp: '2026-08-19T00:00:00.000Z',
+    })
+    const legacyProject: Partial<typeof project> = { ...project }
+    delete legacyProject.basePresetId
+
+    storage.setItem('ui-forge:workspace', JSON.stringify({
+      version: 1,
+      project: legacyProject,
+    }))
+
+    expect(loadThemeProject(storage)?.basePresetId).toBe('minimal')
+  })
 })

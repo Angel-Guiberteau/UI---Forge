@@ -5,6 +5,8 @@ type WorkspaceHeaderProps = {
   projectName: string
   canUndo: boolean
   canRedo: boolean
+  statusLabel: string
+  statusTone: 'base' | 'custom'
   onRename: (name: string) => void
   onUndo: () => void
   onRedo: () => void
@@ -14,6 +16,8 @@ export const WorkspaceHeader = ({
   projectName,
   canUndo,
   canRedo,
+  statusLabel,
+  statusTone,
   onRename,
   onUndo,
   onRedo,
@@ -30,9 +34,9 @@ export const WorkspaceHeader = ({
     <label className="project-name">
       <span className="project-name__label">Project</span>
       <input value={projectName} onChange={(event) => onRename(event.target.value)} />
-      <span className="project-name__status">
+      <span className="project-name__status" data-status={statusTone}>
         <span aria-hidden="true" />
-        Local workspace
+        {statusLabel}
       </span>
     </label>
 

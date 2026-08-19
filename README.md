@@ -2,7 +2,7 @@
 
 UI Forge is an interactive workspace for shaping, previewing, and exporting a cohesive design system in real time.
 
-The project currently includes its production workspace shell, responsive navigation, typed theme model, six visual presets, history, and local persistence. The detailed visual token editor is the next implementation phase.
+The project currently includes its production workspace shell, responsive navigation, a detailed editor for six token families, six visual presets, reversible resets, history, and versioned local persistence.
 
 ## Development
 

@@ -59,4 +59,28 @@ describe('themeEditorReducer', () => {
     )
     expect(state.project.themes).not.toBe(preset.themes)
   })
+
+  it('resets one section without replacing the rest of the mode', () => {
+    const preset = themePresets[0]
+    const initialState = createInitialThemeEditorState(
+      createThemeProject(preset, { id: 'project-1', timestamp }),
+    )
+    const changedState = themeEditorReducer(initialState, {
+      type: 'theme/update-radius',
+      mode: 'light',
+      values: { medium: 28 },
+      updatedAt: '2026-08-19T00:01:00.000Z',
+    })
+    const state = themeEditorReducer(changedState, {
+      type: 'project/reset-section',
+      preset,
+      mode: 'light',
+      section: 'radius',
+      updatedAt: '2026-08-19T00:02:00.000Z',
+    })
+
+    expect(state.project.themes.light.radius).toEqual(preset.themes.light.radius)
+    expect(state.project.themes.light.colors).toEqual(changedState.project.themes.light.colors)
+    expect(state.past).toHaveLength(2)
+  })
 })

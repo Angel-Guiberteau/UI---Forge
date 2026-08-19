@@ -1,10 +1,9 @@
 import { useEffect, useState, type CSSProperties } from 'react'
+import { DesignPanel } from '../components/editor/DesignPanel'
 import { MobileWorkspaceNav, type MobileWorkspaceView } from '../components/workspace/MobileWorkspaceNav'
-import { PresetPanel } from '../components/workspace/PresetPanel'
 import { PreviewStage } from '../components/workspace/PreviewStage'
 import { WorkspaceHeader } from '../components/workspace/WorkspaceHeader'
 import { createThemeCustomProperties } from '../features/theme/theme.css'
-import type { ThemePreset } from '../features/theme/theme.types'
 import { useTheme } from '../features/theme/useTheme'
 
 export const App = () => {
@@ -14,11 +13,6 @@ export const App = () => {
   const tokens = project.themes[project.activeMode]
   const customProperties = createThemeCustomProperties(tokens) as CSSProperties
   const timestamp = () => new Date().toISOString()
-  const selectPreset = (preset: ThemePreset) => dispatch({
-    type: 'project/apply-preset',
-    preset,
-    updatedAt: timestamp(),
-  })
 
   useEffect(() => {
     if (window.matchMedia('(max-width: 700px)').matches) {
@@ -32,6 +26,8 @@ export const App = () => {
         projectName={project.name}
         canUndo={state.past.length > 0}
         canRedo={state.future.length > 0}
+        statusLabel={project.originPresetId === null ? 'Customized' : 'Preset base'}
+        statusTone={project.originPresetId === null ? 'custom' : 'base'}
         onRename={(name) => dispatch({
           type: 'project/rename',
           name,
@@ -42,11 +38,7 @@ export const App = () => {
       />
 
       <section className="forge-workspace" aria-label="Theme workspace">
-        <PresetPanel
-          activePresetId={project.originPresetId}
-          activeMode={project.activeMode}
-          onSelect={selectPreset}
-        />
+        <DesignPanel />
         <PreviewStage
           customProperties={customProperties}
           mode={project.activeMode}

@@ -23,6 +23,7 @@ export const createThemeProject = (
     createdAt: timestamp,
     updatedAt: timestamp,
     activeMode: 'light',
+    basePresetId: preset.id,
     originPresetId: preset.id,
     themes: cloneThemePair(preset.themes),
   }

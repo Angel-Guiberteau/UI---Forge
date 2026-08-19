@@ -172,6 +172,11 @@
     background: var(--forge-success);
     box-shadow: 0 0 7px rgb(131 184 149 / 48%);
   }
+
+  &[data-status="custom"] > span {
+    background: var(--forge-ember);
+    box-shadow: 0 0 7px rgb(242 107 63 / 54%);
+  }
 }
 
 .history-actions {
@@ -212,7 +217,7 @@
 .forge-workspace {
   min-height: calc(100vh - var(--forge-header-height));
   display: grid;
-  grid-template-columns: 338px minmax(0, 1fr);
+  grid-template-columns: 380px minmax(0, 1fr);
 }
 
 .forge-panel {
@@ -361,6 +366,15 @@
   border-radius: 50%;
   color: #1b120e;
   background: var(--forge-ember);
+
+  &[data-customized="true"] {
+    width: auto;
+    padding-inline: 6px;
+    border-radius: 999px;
+    font-size: 0.52rem;
+    font-weight: 750;
+    text-transform: uppercase;
+  }
 }
 
 .preset-card__meta {
@@ -371,31 +385,6 @@
   font-family: "SFMono-Regular", Consolas, monospace;
   font-size: 0.58rem;
   text-transform: uppercase;
-}
-
-.forge-panel__footnote {
-  display: grid;
-  grid-template-columns: 8px 1fr;
-  gap: 10px;
-  align-items: start;
-  margin-top: 26px;
-  padding: 14px;
-  border: 1px solid var(--forge-border);
-  border-radius: var(--forge-radius-sm);
-  background: rgb(255 255 255 / 1.5%);
-
-  p {
-    margin: 0;
-    color: var(--forge-muted);
-    font-size: 0.65rem;
-    line-height: 1.5;
-  }
-
-  strong {
-    display: block;
-    margin-bottom: 1px;
-    color: var(--forge-text);
-  }
 }
 
 .forge-panel__spark {
@@ -553,7 +542,7 @@
 
 @media (max-width: 1100px) {
   .forge-workspace {
-    grid-template-columns: 300px minmax(0, 1fr);
+    grid-template-columns: 340px minmax(0, 1fr);
   }
 
   .forge-panel {
@@ -595,10 +584,6 @@
 
   .preset-list {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .forge-panel__footnote {
-    display: none;
   }
 
   .preview-viewport {
@@ -661,7 +646,7 @@
     padding: 13px;
   }
 
-  .forge-shell[data-mobile-view="presets"] .preview-stage,
+  .forge-shell[data-mobile-view="design"] .preview-stage,
   .forge-shell[data-mobile-view="preview"] .forge-panel {
     display: none;
   }
