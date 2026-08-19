@@ -72,6 +72,7 @@ export type ThemeProject = {
   name: string
   createdAt: string
   updatedAt: string
+  archivedAt: string | null
   activeMode: ThemeMode
   basePresetId: string
   originPresetId: string | null
@@ -91,6 +92,7 @@ export type ThemeEditorSection = 'presets' | 'accessibility' | ThemeCategory
 
 export type ThemeEditorState = {
   project: ThemeProject
+  projects: ThemeProject[]
   past: ThemeProject[]
   future: ThemeProject[]
   viewport: PreviewViewport

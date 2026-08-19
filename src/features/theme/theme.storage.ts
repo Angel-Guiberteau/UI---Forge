@@ -1,11 +1,16 @@
 import type { ThemeProject } from './theme.types'
 
 const STORAGE_KEY = 'ui-forge:workspace'
-const STORAGE_VERSION = 2
+const STORAGE_VERSION = 3
 
-type StoredWorkspace = {
+export type ThemeWorkspace = {
+  activeProjectId: string
+  projects: ThemeProject[]
+}
+
+type StoredWorkspace = ThemeWorkspace & {
   version: number
-  project: ThemeProject
+  project?: ThemeProject
 }
 
 export type StorageAdapter = Pick<Storage, 'getItem' | 'setItem'>
@@ -28,12 +33,28 @@ const isThemeProject = (value: unknown): value is ThemeProject => {
 
 const migrateThemeProject = (project: ThemeProject): ThemeProject => ({
   ...project,
+  archivedAt: project.archivedAt ?? null,
   basePresetId: project.basePresetId ?? project.originPresetId ?? 'minimal',
 })
 
-export const loadThemeProject = (
+const createWorkspace = (
+  projects: ThemeProject[],
+  activeProjectId?: string,
+): ThemeWorkspace | null => {
+  const migratedProjects = projects.filter(isThemeProject).map(migrateThemeProject)
+  const requestedProject = migratedProjects.find((project) => (
+    project.id === activeProjectId && project.archivedAt === null
+  ))
+  const activeProject = requestedProject ?? migratedProjects.find((project) => project.archivedAt === null)
+
+  return activeProject
+    ? { activeProjectId: activeProject.id, projects: migratedProjects }
+    : null
+}
+
+export const loadThemeWorkspace = (
   storage: StorageAdapter,
-): ThemeProject | null => {
+): ThemeWorkspace | null => {
   try {
     const storedValue = storage.getItem(STORAGE_KEY)
 
@@ -43,27 +64,32 @@ export const loadThemeProject = (
 
     const workspace = JSON.parse(storedValue) as Partial<StoredWorkspace>
 
-    const canMigrate = workspace.version === 1 || workspace.version === STORAGE_VERSION
+    if (workspace.version === STORAGE_VERSION && Array.isArray(workspace.projects)) {
+      return createWorkspace(workspace.projects, workspace.activeProjectId)
+    }
 
-    return canMigrate && isThemeProject(workspace.project)
-      ? migrateThemeProject(workspace.project)
-      : null
+    if ((workspace.version === 1 || workspace.version === 2) && isThemeProject(workspace.project)) {
+      return createWorkspace([workspace.project], workspace.project.id)
+    }
+
+    return null
   } catch {
     return null
   }
 }
 
-export const saveThemeProject = (
+export const saveThemeWorkspace = (
   storage: StorageAdapter,
-  project: ThemeProject,
+  workspace: ThemeWorkspace,
 ): boolean => {
   try {
-    const workspace: StoredWorkspace = {
+    const storedWorkspace: StoredWorkspace = {
       version: STORAGE_VERSION,
-      project,
+      activeProjectId: workspace.activeProjectId,
+      projects: workspace.projects,
     }
 
-    storage.setItem(STORAGE_KEY, JSON.stringify(workspace))
+    storage.setItem(STORAGE_KEY, JSON.stringify(storedWorkspace))
     return true
   } catch {
     return false

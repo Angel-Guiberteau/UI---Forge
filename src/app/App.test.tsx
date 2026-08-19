@@ -76,6 +76,46 @@ describe('UI Forge workspace', () => {
     expect(within(dialog).getByText('Copied to clipboard')).toBeInTheDocument()
   })
 
+  it('creates and switches between locally stored theme projects', () => {
+    render(
+      <ThemeProvider>
+        <App />
+      </ThemeProvider>,
+    )
+
+    fireEvent.click(screen.getByRole('button', { name: 'Open project library, 1 active' }))
+    const library = screen.getByRole('dialog', { name: 'Project library' })
+    expect(within(library).getByText('Untitled system')).toBeInTheDocument()
+
+    fireEvent.click(within(library).getByRole('button', { name: 'New system' }))
+    expect(screen.getByDisplayValue('Untitled system 2')).toBeInTheDocument()
+
+    fireEvent.click(screen.getByRole('button', { name: 'Open project library, 2 active' }))
+    fireEvent.click(screen.getByRole('button', { name: 'Open project' }))
+    expect(screen.getByDisplayValue('Untitled system')).toBeInTheDocument()
+  })
+
+  it('duplicates, archives, and restores a project', () => {
+    render(
+      <ThemeProvider>
+        <App />
+      </ThemeProvider>,
+    )
+
+    fireEvent.click(screen.getByRole('button', { name: 'Open project library, 1 active' }))
+    fireEvent.click(screen.getByRole('button', { name: 'Duplicate Untitled system' }))
+    expect(screen.getByText('Untitled system copy')).toBeInTheDocument()
+
+    fireEvent.click(screen.getByRole('button', { name: 'Archive Untitled system copy' }))
+    const confirmation = screen.getByRole('dialog', { name: 'Archive Untitled system copy?' })
+    fireEvent.click(within(confirmation).getByRole('button', { name: 'Archive project' }))
+    fireEvent.click(screen.getByRole('tab', { name: /Archived/ }))
+    expect(screen.getByText('Untitled system copy')).toBeInTheDocument()
+
+    fireEvent.click(screen.getByRole('button', { name: 'Restore project' }))
+    expect(screen.getByText('No archived projects')).toBeInTheDocument()
+  })
+
   it('restores focus after closing the export dialog', () => {
     render(
       <ThemeProvider>

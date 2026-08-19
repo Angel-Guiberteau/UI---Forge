@@ -1,20 +1,41 @@
-import { useEffect, useState, type CSSProperties } from 'react'
+import { useCallback, useEffect, useState, type CSSProperties } from 'react'
 import { DesignPanel } from '../components/editor/DesignPanel'
 import { ExportDialog } from '../components/export/ExportDialog'
+import { ProjectLibraryDialog } from '../components/projects/ProjectLibraryDialog'
 import { MobileWorkspaceNav, type MobileWorkspaceView } from '../components/workspace/MobileWorkspaceNav'
 import { PreviewStage } from '../components/workspace/PreviewStage'
 import { WorkspaceHeader } from '../components/workspace/WorkspaceHeader'
 import { createThemeCustomProperties } from '../features/theme/theme.css'
+import {
+  createThemeProject,
+  createUniqueProjectName,
+  duplicateThemeProject,
+} from '../features/theme/theme.factory'
+import type { ThemeProject } from '../features/theme/theme.types'
 import { useTheme } from '../features/theme/useTheme'
 
 export const App = () => {
   const { state, dispatch } = useTheme()
   const [mobileView, setMobileView] = useState<MobileWorkspaceView>('preview')
   const [isExportOpen, setIsExportOpen] = useState(false)
+  const [isLibraryOpen, setIsLibraryOpen] = useState(false)
   const { project } = state
   const tokens = project.themes[project.activeMode]
   const customProperties = createThemeCustomProperties(tokens) as CSSProperties
   const timestamp = () => new Date().toISOString()
+  const activeProjectCount = state.projects.filter((storedProject) => storedProject.archivedAt === null).length
+  const closeLibrary = useCallback(() => setIsLibraryOpen(false), [])
+
+  const handleCreateProject = () => {
+    const name = createUniqueProjectName('Untitled system', state.projects)
+    dispatch({ type: 'library/create', project: createThemeProject(undefined, { name }) })
+    setIsLibraryOpen(false)
+  }
+
+  const handleDuplicateProject = (sourceProject: ThemeProject) => {
+    const name = createUniqueProjectName(`${sourceProject.name} copy`, state.projects)
+    dispatch({ type: 'library/duplicate', project: duplicateThemeProject(sourceProject, { name }) })
+  }
 
   useEffect(() => {
     if (window.matchMedia('(max-width: 700px)').matches) {
@@ -30,6 +51,7 @@ export const App = () => {
         canRedo={state.future.length > 0}
         statusLabel={project.originPresetId === null ? 'Customized' : 'Preset base'}
         statusTone={project.originPresetId === null ? 'custom' : 'base'}
+        projectCount={activeProjectCount}
         onRename={(name) => dispatch({
           type: 'project/rename',
           name,
@@ -37,6 +59,7 @@ export const App = () => {
         })}
         onUndo={() => dispatch({ type: 'history/undo' })}
         onRedo={() => dispatch({ type: 'history/redo' })}
+        onOpenLibrary={() => setIsLibraryOpen(true)}
         onExport={() => setIsExportOpen(true)}
       />
 
@@ -57,6 +80,29 @@ export const App = () => {
         open={isExportOpen}
         project={project}
         onClose={() => setIsExportOpen(false)}
+      />
+
+      <ProjectLibraryDialog
+        open={isLibraryOpen}
+        activeProjectId={project.id}
+        projects={state.projects}
+        onClose={closeLibrary}
+        onCreate={handleCreateProject}
+        onSelect={(selectedProject) => {
+          dispatch({ type: 'project/replace', project: selectedProject })
+          setIsLibraryOpen(false)
+        }}
+        onDuplicate={handleDuplicateProject}
+        onArchive={(archivedProject) => dispatch({
+          type: 'library/archive',
+          projectId: archivedProject.id,
+          archivedAt: timestamp(),
+        })}
+        onRestore={(archivedProject) => dispatch({
+          type: 'library/restore',
+          projectId: archivedProject.id,
+          updatedAt: timestamp(),
+        })}
       />
     </main>
   )

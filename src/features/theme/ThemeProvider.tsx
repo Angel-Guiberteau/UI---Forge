@@ -1,20 +1,24 @@
 import { useEffect, useReducer, type PropsWithChildren } from 'react'
 import { ThemeContext } from './theme.context'
 import { createInitialThemeEditorState, themeEditorReducer } from './theme.reducer'
-import { loadThemeProject, saveThemeProject } from './theme.storage'
+import { loadThemeWorkspace, saveThemeWorkspace } from './theme.storage'
 
 const getInitialState = () => {
-  const storedProject = loadThemeProject(window.localStorage)
+  const workspace = loadThemeWorkspace(window.localStorage)
+  const storedProject = workspace?.projects.find((project) => project.id === workspace.activeProjectId)
 
-  return createInitialThemeEditorState(storedProject ?? undefined)
+  return createInitialThemeEditorState(storedProject ?? undefined, workspace?.projects)
 }
 
 export const ThemeProvider = ({ children }: PropsWithChildren) => {
   const [state, dispatch] = useReducer(themeEditorReducer, undefined, getInitialState)
 
   useEffect(() => {
-    saveThemeProject(window.localStorage, state.project)
-  }, [state.project])
+    saveThemeWorkspace(window.localStorage, {
+      activeProjectId: state.project.id,
+      projects: state.projects,
+    })
+  }, [state.project.id, state.projects])
 
   return (
     <ThemeContext.Provider value={{ state, dispatch }}>

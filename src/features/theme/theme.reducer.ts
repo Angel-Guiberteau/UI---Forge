@@ -31,6 +31,10 @@ export type ThemeEditorAction =
   | { type: 'project/apply-preset'; preset: ThemePreset; updatedAt: string }
   | { type: 'project/reset-section'; preset: ThemePreset; mode: ThemeMode; section: ThemeCategory; updatedAt: string }
   | { type: 'project/replace'; project: ThemeProject }
+  | { type: 'library/create'; project: ThemeProject }
+  | { type: 'library/duplicate'; project: ThemeProject }
+  | { type: 'library/archive'; projectId: string; archivedAt: string }
+  | { type: 'library/restore'; projectId: string; updatedAt: string }
   | { type: 'history/undo' }
   | { type: 'history/redo' }
   | { type: 'view/set-mode'; mode: ThemeMode }
@@ -39,13 +43,22 @@ export type ThemeEditorAction =
 
 export const createInitialThemeEditorState = (
   project: ThemeProject = createThemeProject(),
+  projects: ThemeProject[] = [project],
 ): ThemeEditorState => ({
   project,
+  projects,
   past: [],
   future: [],
   viewport: 'desktop',
   selectedSection: 'presets',
 })
+
+const replaceStoredProject = (
+  projects: ThemeProject[],
+  project: ThemeProject,
+): ThemeProject[] => projects.map((storedProject) => (
+  storedProject.id === project.id ? project : storedProject
+))
 
 const addToHistory = (
   state: ThemeEditorState,
@@ -53,6 +66,7 @@ const addToHistory = (
 ): ThemeEditorState => ({
   ...state,
   project,
+  projects: replaceStoredProject(state.projects, project),
   past: [...state.past, state.project].slice(-HISTORY_LIMIT),
   future: [],
 })
@@ -103,6 +117,11 @@ export const themeEditorReducer = (
       return {
         ...state,
         project: { ...state.project, name: action.name, updatedAt: action.updatedAt },
+        projects: replaceStoredProject(state.projects, {
+          ...state.project,
+          name: action.name,
+          updatedAt: action.updatedAt,
+        }),
       }
     case 'project/apply-preset':
       return addToHistory(state, {
@@ -128,7 +147,54 @@ export const themeEditorReducer = (
         },
       })
     case 'project/replace':
-      return createInitialThemeEditorState(action.project)
+      return {
+        ...createInitialThemeEditorState(action.project, state.projects),
+        viewport: state.viewport,
+        selectedSection: state.selectedSection,
+      }
+    case 'library/create':
+    case 'library/duplicate':
+      return {
+        ...createInitialThemeEditorState(action.project, [...state.projects, action.project]),
+        viewport: state.viewport,
+        selectedSection: state.selectedSection,
+      }
+    case 'library/archive': {
+      const activeProjects = state.projects.filter((project) => project.archivedAt === null)
+
+      if (activeProjects.length <= 1) {
+        return state
+      }
+
+      const projects = state.projects.map((project) => (
+        project.id === action.projectId
+          ? { ...project, archivedAt: action.archivedAt, updatedAt: action.archivedAt }
+          : project
+      ))
+
+      if (state.project.id !== action.projectId) {
+        return { ...state, projects }
+      }
+
+      const nextProject = projects.find((project) => project.archivedAt === null)
+
+      return nextProject
+        ? {
+            ...createInitialThemeEditorState(nextProject, projects),
+            viewport: state.viewport,
+            selectedSection: state.selectedSection,
+          }
+        : state
+    }
+    case 'library/restore': {
+      const projects = state.projects.map((project) => (
+        project.id === action.projectId
+          ? { ...project, archivedAt: null, updatedAt: action.updatedAt }
+          : project
+      ))
+
+      return { ...state, projects }
+    }
     case 'history/undo': {
       const previousProject = state.past.at(-1)
 
@@ -136,6 +202,7 @@ export const themeEditorReducer = (
         ? {
             ...state,
             project: previousProject,
+            projects: replaceStoredProject(state.projects, previousProject),
             past: state.past.slice(0, -1),
             future: [state.project, ...state.future],
           }
@@ -148,6 +215,7 @@ export const themeEditorReducer = (
         ? {
             ...state,
             project: nextProject,
+            projects: replaceStoredProject(state.projects, nextProject),
             past: [...state.past, state.project].slice(-HISTORY_LIMIT),
             future: state.future.slice(1),
           }
@@ -157,6 +225,10 @@ export const themeEditorReducer = (
       return {
         ...state,
         project: { ...state.project, activeMode: action.mode },
+        projects: replaceStoredProject(state.projects, {
+          ...state.project,
+          activeMode: action.mode,
+        }),
       }
     case 'view/set-viewport':
       return { ...state, viewport: action.viewport }

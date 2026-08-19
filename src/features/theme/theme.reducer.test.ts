@@ -83,4 +83,65 @@ describe('themeEditorReducer', () => {
     expect(state.project.themes.light.colors).toEqual(changedState.project.themes.light.colors)
     expect(state.past).toHaveLength(2)
   })
+
+  it('creates, switches, and duplicates projects without sharing history', () => {
+    const firstProject = createThemeProject(themePresets[0], { id: 'project-1', timestamp })
+    const secondProject = createThemeProject(themePresets[1], { id: 'project-2', timestamp })
+    const duplicateProject = createThemeProject(themePresets[1], {
+      id: 'project-3',
+      name: 'Corporate copy',
+      timestamp,
+    })
+    const initialState = createInitialThemeEditorState(firstProject)
+    const createdState = themeEditorReducer(initialState, {
+      type: 'library/create',
+      project: secondProject,
+    })
+    const switchedState = themeEditorReducer(createdState, {
+      type: 'project/replace',
+      project: firstProject,
+    })
+    const duplicatedState = themeEditorReducer(switchedState, {
+      type: 'library/duplicate',
+      project: duplicateProject,
+    })
+
+    expect(createdState.project.id).toBe('project-2')
+    expect(switchedState.project.id).toBe('project-1')
+    expect(duplicatedState.project.id).toBe('project-3')
+    expect(duplicatedState.projects).toHaveLength(3)
+    expect(duplicatedState.past).toHaveLength(0)
+  })
+
+  it('archives the active project, selects another, and restores it later', () => {
+    const firstProject = createThemeProject(themePresets[0], { id: 'project-1', timestamp })
+    const secondProject = createThemeProject(themePresets[1], { id: 'project-2', timestamp })
+    const initialState = createInitialThemeEditorState(firstProject, [firstProject, secondProject])
+    const archivedState = themeEditorReducer(initialState, {
+      type: 'library/archive',
+      projectId: firstProject.id,
+      archivedAt: '2026-08-19T00:02:00.000Z',
+    })
+    const restoredState = themeEditorReducer(archivedState, {
+      type: 'library/restore',
+      projectId: firstProject.id,
+      updatedAt: '2026-08-19T00:03:00.000Z',
+    })
+
+    expect(archivedState.project.id).toBe(secondProject.id)
+    expect(archivedState.projects[0].archivedAt).not.toBeNull()
+    expect(restoredState.projects[0].archivedAt).toBeNull()
+  })
+
+  it('keeps at least one active project', () => {
+    const project = createThemeProject(themePresets[0], { id: 'project-1', timestamp })
+    const initialState = createInitialThemeEditorState(project)
+    const state = themeEditorReducer(initialState, {
+      type: 'library/archive',
+      projectId: project.id,
+      archivedAt: '2026-08-19T00:02:00.000Z',
+    })
+
+    expect(state).toBe(initialState)
+  })
 })

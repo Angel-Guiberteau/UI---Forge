@@ -22,9 +22,48 @@ export const createThemeProject = (
     name: options.name ?? 'Untitled system',
     createdAt: timestamp,
     updatedAt: timestamp,
+    archivedAt: null,
     activeMode: 'light',
     basePresetId: preset.id,
     originPresetId: preset.id,
     themes: cloneThemePair(preset.themes),
   }
+}
+
+export const duplicateThemeProject = (
+  project: ThemeProject,
+  options: { id?: string; name?: string; timestamp?: string } = {},
+): ThemeProject => {
+  const timestamp = options.timestamp ?? new Date().toISOString()
+
+  return {
+    ...project,
+    id: options.id ?? createProjectId(),
+    name: options.name ?? `${project.name} copy`,
+    createdAt: timestamp,
+    updatedAt: timestamp,
+    archivedAt: null,
+    themes: cloneThemePair(project.themes),
+  }
+}
+
+export const createUniqueProjectName = (
+  preferredName: string,
+  projects: ThemeProject[],
+): string => {
+  const existingNames = new Set(projects.map((project) => project.name.trim().toLocaleLowerCase()))
+
+  if (!existingNames.has(preferredName.toLocaleLowerCase())) {
+    return preferredName
+  }
+
+  let suffix = 2
+  let candidate = `${preferredName} ${suffix}`
+
+  while (existingNames.has(candidate.toLocaleLowerCase())) {
+    suffix += 1
+    candidate = `${preferredName} ${suffix}`
+  }
+
+  return candidate
 }

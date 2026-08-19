@@ -7,9 +7,11 @@ type WorkspaceHeaderProps = {
   canRedo: boolean
   statusLabel: string
   statusTone: 'base' | 'custom'
+  projectCount: number
   onRename: (name: string) => void
   onUndo: () => void
   onRedo: () => void
+  onOpenLibrary: () => void
   onExport: () => void
 }
 
@@ -19,9 +21,11 @@ export const WorkspaceHeader = ({
   canRedo,
   statusLabel,
   statusTone,
+  projectCount,
   onRename,
   onUndo,
   onRedo,
+  onOpenLibrary,
   onExport,
 }: WorkspaceHeaderProps) => (
   <header className="forge-header">
@@ -64,6 +68,11 @@ export const WorkspaceHeader = ({
         <Icon name="redo" />
       </button>
       <span className="history-actions__separator" aria-hidden="true" />
+      <button className="library-trigger" type="button" aria-label={`Open project library, ${projectCount} active`} onClick={onOpenLibrary}>
+        <Icon name="folder" size={16} />
+        <span>Projects</span>
+        <strong aria-hidden="true">{projectCount}</strong>
+      </button>
       <button className="export-trigger" type="button" onClick={onExport}>
         <Icon name="export" size={16} />
         <span>Export</span>
