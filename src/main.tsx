@@ -4,6 +4,7 @@ import { App } from './app/App'
 import { ThemeProvider } from './features/theme/ThemeProvider'
 import './styles/base.css'
 import './styles/editor.css'
+import './styles/export.css'
 import './styles/specimen.css'
 import './styles/workspace.css'
 

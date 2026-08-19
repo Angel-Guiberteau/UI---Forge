@@ -10,6 +10,7 @@ type WorkspaceHeaderProps = {
   onRename: (name: string) => void
   onUndo: () => void
   onRedo: () => void
+  onExport: () => void
 }
 
 export const WorkspaceHeader = ({
@@ -21,6 +22,7 @@ export const WorkspaceHeader = ({
   onRename,
   onUndo,
   onRedo,
+  onExport,
 }: WorkspaceHeaderProps) => (
   <header className="forge-header">
     <a className="brand" href="/" aria-label="UI Forge home">
@@ -40,7 +42,7 @@ export const WorkspaceHeader = ({
       </span>
     </label>
 
-    <div className="history-actions" aria-label="Edit history">
+    <div className="history-actions" aria-label="Workspace actions">
       <button
         className="icon-button"
         type="button"
@@ -60,6 +62,11 @@ export const WorkspaceHeader = ({
         onClick={onRedo}
       >
         <Icon name="redo" />
+      </button>
+      <span className="history-actions__separator" aria-hidden="true" />
+      <button className="export-trigger" type="button" onClick={onExport}>
+        <Icon name="export" size={16} />
+        <span>Export</span>
       </button>
     </div>
   </header>

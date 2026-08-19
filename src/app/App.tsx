@@ -1,5 +1,6 @@
 import { useEffect, useState, type CSSProperties } from 'react'
 import { DesignPanel } from '../components/editor/DesignPanel'
+import { ExportDialog } from '../components/export/ExportDialog'
 import { MobileWorkspaceNav, type MobileWorkspaceView } from '../components/workspace/MobileWorkspaceNav'
 import { PreviewStage } from '../components/workspace/PreviewStage'
 import { WorkspaceHeader } from '../components/workspace/WorkspaceHeader'
@@ -9,6 +10,7 @@ import { useTheme } from '../features/theme/useTheme'
 export const App = () => {
   const { state, dispatch } = useTheme()
   const [mobileView, setMobileView] = useState<MobileWorkspaceView>('preview')
+  const [isExportOpen, setIsExportOpen] = useState(false)
   const { project } = state
   const tokens = project.themes[project.activeMode]
   const customProperties = createThemeCustomProperties(tokens) as CSSProperties
@@ -35,6 +37,7 @@ export const App = () => {
         })}
         onUndo={() => dispatch({ type: 'history/undo' })}
         onRedo={() => dispatch({ type: 'history/redo' })}
+        onExport={() => setIsExportOpen(true)}
       />
 
       <section className="forge-workspace" aria-label="Theme workspace">
@@ -49,6 +52,12 @@ export const App = () => {
       </section>
 
       <MobileWorkspaceNav view={mobileView} onChange={setMobileView} />
+
+      <ExportDialog
+        open={isExportOpen}
+        project={project}
+        onClose={() => setIsExportOpen(false)}
+      />
     </main>
   )
 }

@@ -1,5 +1,5 @@
-import { fireEvent, render, screen, within } from '@testing-library/react'
-import { beforeEach, describe, expect, it } from 'vitest'
+import { fireEvent, render, screen, waitFor, within } from '@testing-library/react'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { ThemeProvider } from '../features/theme/ThemeProvider'
 import { App } from './App'
 
@@ -47,6 +47,51 @@ describe('UI Forge workspace', () => {
     expect(darkMode).toHaveAttribute('aria-pressed', 'true')
     expect(mobileViewport).toHaveAttribute('aria-pressed', 'true')
     expect(screen.getByText('mobile · dark')).toBeInTheDocument()
+  })
+
+  it('exports the selected theme scope as CSS or JSON', async () => {
+    const writeText = vi.fn().mockResolvedValue(undefined)
+    Object.defineProperty(navigator, 'clipboard', {
+      configurable: true,
+      value: { writeText },
+    })
+
+    render(
+      <ThemeProvider>
+        <App />
+      </ThemeProvider>,
+    )
+
+    fireEvent.click(screen.getByRole('button', { name: 'Export' }))
+    const dialog = screen.getByRole('dialog', { name: 'Export production tokens' })
+
+    expect(within(dialog).getByLabelText('CSS export preview')).toHaveTextContent('[data-theme="dark"]')
+    fireEvent.click(within(dialog).getByRole('tab', { name: /JSON tokens/ }))
+    fireEvent.click(within(dialog).getByRole('button', { name: 'Dark' }))
+    fireEvent.click(within(dialog).getByRole('button', { name: 'Copy' }))
+
+    await waitFor(() => expect(writeText).toHaveBeenCalledOnce())
+    expect(writeText.mock.calls[0][0]).toContain('"dark"')
+    expect(writeText.mock.calls[0][0]).not.toContain('"light"')
+    expect(within(dialog).getByText('Copied to clipboard')).toBeInTheDocument()
+  })
+
+  it('restores focus after closing the export dialog', () => {
+    render(
+      <ThemeProvider>
+        <App />
+      </ThemeProvider>,
+    )
+
+    const exportButton = screen.getByRole('button', { name: 'Export' })
+    exportButton.focus()
+    fireEvent.click(exportButton)
+    expect(screen.getByRole('button', { name: 'Close export dialog' })).toHaveFocus()
+
+    fireEvent.keyDown(document, { key: 'Escape' })
+
+    expect(screen.queryByRole('dialog', { name: 'Export production tokens' })).not.toBeInTheDocument()
+    expect(exportButton).toHaveFocus()
   })
 
   it('navigates through the specimen and exposes project actions', () => {

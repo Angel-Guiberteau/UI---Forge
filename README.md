@@ -8,6 +8,8 @@ The live specimen is a complete fictional product called Northstar. It includes 
 
 Accessibility Lab evaluates semantic foreground and background combinations in real time. It calculates WCAG contrast ratios, reports AA and AAA outcomes, distinguishes interface thresholds from text requirements, and links failing combinations back to the color editor.
 
+The export workspace packages the current system as framework-neutral CSS variables or structured JSON. Exports can include both themes or a single light or dark mode, support clipboard and file download workflows, and generate safe filenames from the project name.
+
 ## Development
 
 ```bash
