@@ -20,6 +20,7 @@ export type IconName =
   | 'refresh'
   | 'reset'
   | 'search'
+  | 'shield'
   | 'shadow'
   | 'spacing'
   | 'sun'
@@ -57,6 +58,7 @@ const iconPaths: Record<IconName, React.ReactNode> = {
   refresh: <><path d="M20 6v5h-5" /><path d="M4 18v-5h5" /><path d="M18.5 9A7 7 0 0 0 6.2 6.2L4 8M5.5 15A7 7 0 0 0 17.8 17.8L20 16" /></>,
   reset: <><path d="M3 12a9 9 0 1 0 3-6.7L3 8" /><path d="M3 3v5h5" /></>,
   search: <><circle cx="11" cy="11" r="7" /><path d="m20 20-4-4" /></>,
+  shield: <><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" /><path d="m9 12 2 2 4-4" /></>,
   shadow: <><rect x="4" y="4" width="13" height="13" rx="2" /><path d="M8 20h9a3 3 0 0 0 3-3V8" /></>,
   spacing: <><path d="M4 7V4h3M17 4h3v3M20 17v3h-3M7 20H4v-3" /><path d="M8 12h8M12 8v8" /></>,
   sun: <><circle cx="12" cy="12" r="3.5" /><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" /></>,

@@ -140,6 +140,40 @@ describe('UI Forge workspace', () => {
     expect(screen.getByText('Customized')).toBeInTheDocument()
   })
 
+  it('audits semantic color pairs against WCAG thresholds', () => {
+    render(
+      <ThemeProvider>
+        <App />
+      </ThemeProvider>,
+    )
+
+    fireEvent.click(screen.getByRole('button', { name: 'Audit' }))
+
+    expect(screen.getByRole('heading', { name: 'Semantic pairs' })).toBeInTheDocument()
+    expect(screen.getByText('WCAG 2.2')).toBeInTheDocument()
+    expect(screen.getByLabelText(/Primary text contrast ratio/)).toBeInTheDocument()
+  })
+
+  it('flags failing contrast and links back to the color editor', () => {
+    render(
+      <ThemeProvider>
+        <App />
+      </ThemeProvider>,
+    )
+
+    fireEvent.click(screen.getByRole('button', { name: 'Colors' }))
+    const primaryValue = screen.getByLabelText('Primary hexadecimal value')
+    fireEvent.focus(primaryValue)
+    fireEvent.change(primaryValue, { target: { value: '#F4F4F0' } })
+    fireEvent.blur(primaryValue)
+    fireEvent.click(screen.getByRole('button', { name: 'Audit' }))
+
+    expect(screen.getByRole('alert')).toHaveTextContent('Contrast risk detected.')
+    expect(screen.getByLabelText('Primary action contrast ratio 1.00 to 1')).toBeInTheDocument()
+    fireEvent.click(screen.getByRole('button', { name: 'Edit colors' }))
+    expect(screen.getByRole('button', { name: 'Colors' })).toHaveAttribute('aria-current', 'page')
+  })
+
   it('resets a section to the base preset values', () => {
     render(
       <ThemeProvider>

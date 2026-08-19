@@ -5,6 +5,7 @@ import { useTheme } from '../../features/theme/useTheme'
 import { defaultPreset, themePresets } from '../../presets/theme-presets'
 import { ConfirmResetDialog } from '../ui/ConfirmResetDialog'
 import { Icon, type IconName } from '../ui/Icon'
+import { AccessibilityAudit } from './AccessibilityAudit'
 import { PresetSection } from './PresetSection'
 import { ThemeTokenEditor } from './ThemeTokenEditor'
 
@@ -18,8 +19,9 @@ const editorSections: Array<{
   { id: 'typography', label: 'Type', icon: 'type' },
   { id: 'radius', label: 'Radius', icon: 'radius' },
   { id: 'spacing', label: 'Spacing', icon: 'spacing' },
-  { id: 'shadows', label: 'Shadow', icon: 'shadow' },
-  { id: 'controls', label: 'Controls', icon: 'controls' },
+  { id: 'shadows', label: 'Depth', icon: 'shadow' },
+  { id: 'controls', label: 'Focus', icon: 'controls' },
+  { id: 'accessibility', label: 'Audit', icon: 'shield' },
 ]
 
 const sectionDetails: Record<ThemeEditorSection, { eyebrow: string; title: string; description: string }> = {
@@ -30,6 +32,7 @@ const sectionDetails: Record<ThemeEditorSection, { eyebrow: string; title: strin
   spacing: { eyebrow: 'Layout rhythm', title: 'Tune the density', description: 'Build calm through a predictable spacing scale.' },
   shadows: { eyebrow: 'Elevation', title: 'Control the depth', description: 'Use light and distance to separate surfaces.' },
   controls: { eyebrow: 'Interaction', title: 'Refine the controls', description: 'Size and focus details for usable actions.' },
+  accessibility: { eyebrow: 'Accessibility lab', title: 'Measure the contrast', description: 'Test semantic color pairs against WCAG targets.' },
 }
 
 export const DesignPanel = () => {
@@ -40,7 +43,7 @@ export const DesignPanel = () => {
   const basePreset = themePresets.find((preset) => preset.id === project.basePresetId) ?? defaultPreset
   const details = sectionDetails[selectedSection]
   const customProperties = createThemeCustomProperties(tokens) as CSSProperties
-  const isTokenSection = selectedSection !== 'presets'
+  const isTokenSection = selectedSection !== 'presets' && selectedSection !== 'accessibility'
   const isSectionDirty = (section: ThemeCategory) => (
     JSON.stringify(tokens[section]) !== JSON.stringify(basePreset.themes[project.activeMode][section])
   )
@@ -88,14 +91,14 @@ export const DesignPanel = () => {
         )}
       </div>
 
-      {isTokenSection && (
+      {selectedSection !== 'presets' && (
         <div className="editor-context">
           <p>{details.description}</p>
           <span>{project.activeMode} mode</span>
         </div>
       )}
 
-      {selectedSection === 'presets' ? (
+      {selectedSection === 'presets' && (
         <PresetSection
           basePresetId={project.basePresetId}
           isCustomized={project.originPresetId === null}
@@ -106,7 +109,17 @@ export const DesignPanel = () => {
             updatedAt: new Date().toISOString(),
           })}
         />
-      ) : (
+      )}
+
+      {selectedSection === 'accessibility' && (
+        <AccessibilityAudit
+          colors={tokens.colors}
+          mode={project.activeMode}
+          onEditColors={() => dispatch({ type: 'view/set-section', section: 'colors' })}
+        />
+      )}
+
+      {isTokenSection && (
         <>
           <div className="token-sample" data-section={selectedSection} style={customProperties} aria-hidden="true">
             <span>Aa</span>

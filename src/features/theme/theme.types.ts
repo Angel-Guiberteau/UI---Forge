@@ -87,7 +87,7 @@ export type ThemePreset = {
 
 export type ThemeCategory = keyof ThemeTokens
 
-export type ThemeEditorSection = 'presets' | ThemeCategory
+export type ThemeEditorSection = 'presets' | 'accessibility' | ThemeCategory
 
 export type ThemeEditorState = {
   project: ThemeProject
