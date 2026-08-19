@@ -17,6 +17,7 @@ export const createThemeCustomProperties = (
   '--font-family-body': tokens.typography.fontFamily,
   '--font-family-display': tokens.typography.displayFontFamily,
   '--font-size-base': `${tokens.typography.baseSize}px`,
+  '--type-scale-ratio': String(tokens.typography.scaleRatio),
   '--line-height-body': String(tokens.typography.lineHeight),
   '--font-weight-heading': String(tokens.typography.headingWeight),
   '--font-weight-body': String(tokens.typography.bodyWeight),

@@ -4,6 +4,8 @@
   "description": "Shape and test cohesive design systems in real time.",
   "start_url": "/",
   "display": "standalone",
+  "orientation": "any",
+  "categories": ["design", "developer", "productivity"],
   "background_color": "#111210",
   "theme_color": "#111210",
   "icons": [

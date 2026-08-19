@@ -53,7 +53,7 @@ describe('UI Forge workspace', () => {
     expect(screen.getByText('mobile · dark')).toBeInTheDocument()
   })
 
-  it('exports the selected theme scope as CSS or JSON', async () => {
+  it('exports the selected theme scope as CSS, JSON, or Tailwind', async () => {
     const writeText = vi.fn().mockResolvedValue(undefined)
     Object.defineProperty(navigator, 'clipboard', {
       configurable: true,
@@ -70,6 +70,8 @@ describe('UI Forge workspace', () => {
     const dialog = screen.getByRole('dialog', { name: 'Export production tokens' })
 
     expect(within(dialog).getByLabelText('CSS export preview')).toHaveTextContent('[data-theme="dark"]')
+    fireEvent.click(within(dialog).getByRole('tab', { name: /Tailwind v4/ }))
+    expect(within(dialog).getByLabelText('TAILWIND export preview')).toHaveTextContent('@theme inline')
     fireEvent.click(within(dialog).getByRole('tab', { name: /JSON tokens/ }))
     fireEvent.click(within(dialog).getByRole('button', { name: 'Dark' }))
     fireEvent.click(within(dialog).getByRole('button', { name: 'Copy' }))

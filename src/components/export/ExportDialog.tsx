@@ -20,6 +20,7 @@ type ExportFeedback = 'idle' | 'copied' | 'downloaded' | 'error'
 const formats: Array<{ id: ExportFormat; label: string; description: string }> = [
   { id: 'css', label: 'CSS variables', description: 'Drop into any stylesheet' },
   { id: 'json', label: 'JSON tokens', description: 'Portable structured data' },
+  { id: 'tailwind', label: 'Tailwind v4', description: 'CSS-first theme utilities' },
 ]
 
 const scopes: Array<{ id: ExportScope; label: string }> = [
@@ -84,7 +85,7 @@ export const ExportDialog = ({ open, project, onClose }: ExportDialogProps) => {
   }
 
   const handleDownload = () => {
-    const blob = new Blob([output], { type: format === 'css' ? 'text/css' : 'application/json' })
+    const blob = new Blob([output], { type: format === 'json' ? 'application/json' : 'text/css' })
     const url = URL.createObjectURL(blob)
     const link = document.createElement('a')
     link.href = url
@@ -134,7 +135,7 @@ export const ExportDialog = ({ open, project, onClose }: ExportDialogProps) => {
                       setFeedback('idle')
                     }}
                   >
-                    <Icon name={option.id === 'css' ? 'fileCode' : 'braces'} size={16} />
+                    <Icon name={option.id === 'json' ? 'braces' : option.id === 'tailwind' ? 'spacing' : 'fileCode'} size={16} />
                     <span><strong>{option.label}</strong><small>{option.description}</small></span>
                     <Icon name="chevronRight" size={14} />
                   </button>
