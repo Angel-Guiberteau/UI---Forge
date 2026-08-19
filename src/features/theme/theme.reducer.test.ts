@@ -53,7 +53,7 @@ describe('themeEditorReducer', () => {
       updatedAt: '2026-08-19T00:01:00.000Z',
     })
 
-    expect(state.project.originPresetId).toBe('cyber')
+    expect(state.project.originPresetId).toBe('grid')
     expect(state.project.themes.dark.colors.primary).toBe(
       preset.themes.dark.colors.primary,
     )

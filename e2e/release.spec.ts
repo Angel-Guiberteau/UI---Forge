@@ -27,9 +27,13 @@ test('updates the live system across preset, token, mode, and viewport changes',
   await page.goto('./')
 
   const specimen = page.locator('.specimen')
+  const preview = page.locator('.preview-viewport')
 
-  await page.getByRole('button', { name: /Playful/ }).click()
-  await expect(page.getByRole('button', { name: /Playful/ })).toHaveAttribute('aria-pressed', 'true')
+  await expect(preview).toHaveAttribute('data-fit', 'true')
+  await expect(preview).toHaveCSS('overflow', 'hidden')
+
+  await page.getByRole('button', { name: /Bloom/ }).click()
+  await expect(page.getByRole('button', { name: /Bloom/ })).toHaveAttribute('aria-pressed', 'true')
 
   await page.getByRole('button', { name: 'Colors' }).click()
   const primaryValue = page.getByRole('textbox', { name: 'Primary hexadecimal value' })
@@ -38,6 +42,8 @@ test('updates the live system across preset, token, mode, and viewport changes',
 
   await expect(primaryValue).toHaveValue('#3366FF')
   await expect(specimen).toHaveCSS('--color-primary', '#3366FF')
+  await expect(preview).toHaveAttribute('data-fit', 'false')
+  await expect(preview).toHaveCSS('overflow', 'auto')
 
   await page.getByRole('button', { name: 'Dark' }).click()
   await expect(specimen).toHaveAttribute('data-mode', 'dark')

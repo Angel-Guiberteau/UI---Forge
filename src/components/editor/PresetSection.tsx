@@ -43,7 +43,10 @@ export const PresetSection = ({
             </span>
             <span className="preset-card__copy">
               <span className="preset-card__title">
-                <strong>{preset.name}</strong>
+                <span>
+                  <small>{preset.category}</small>
+                  <strong>{preset.name}</strong>
+                </span>
                 {isBase && (
                   <span
                     className="preset-card__selected"

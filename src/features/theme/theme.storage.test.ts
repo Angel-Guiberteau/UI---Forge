@@ -60,7 +60,7 @@ describe('theme storage', () => {
 
     expect(loadThemeWorkspace(storage)).toEqual({
       activeProjectId: 'project-1',
-      projects: [{ ...project, basePresetId: 'minimal', archivedAt: null }],
+      projects: [{ ...project, basePresetId: 'forge', archivedAt: null }],
     })
   })
 

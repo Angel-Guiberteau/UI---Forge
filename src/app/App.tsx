@@ -117,6 +117,7 @@ export const App = () => {
         <DesignPanel />
         <PreviewStage
           customProperties={customProperties}
+          fitToViewport={project.originPresetId !== null}
           mode={project.activeMode}
           viewport={state.viewport}
           onModeChange={(mode) => dispatch({ type: 'view/set-mode', mode })}

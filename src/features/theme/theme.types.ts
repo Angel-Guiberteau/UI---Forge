@@ -82,6 +82,7 @@ export type ThemeProject = {
 export type ThemePreset = {
   id: string
   name: string
+  category: string
   description: string
   themes: ThemePair
 }

@@ -21,7 +21,7 @@ Demonstrate product design, React architecture, TypeScript, complex client state
 ## Features
 
 - Live editing for colors, typography, radius, spacing, shadows, and controls.
-- Six distinct presets: Minimal, Corporate, Playful, Luxury, Cyber, and Editorial.
+- Six distinct presets: Forge, Orbit, Bloom, Atelier, Grid, and Terminal.
 - Independent light and dark themes with instant mode switching.
 - Complete interactive preview application with desktop, tablet, and mobile frames.
 - Loading, empty, error, success, modal, dropdown, table, and form states.
@@ -83,7 +83,7 @@ No environment variables are required. UI Forge has no external API, account pro
 
 ## Demo data
 
-The initial Minimal system and the complete Northstar specimen are generated in the browser. Presets, realistic dashboard content, projects, activity, notifications, and alternate application states are available immediately after installation.
+The initial Forge system and the complete Northstar specimen are generated in the browser. Presets, realistic dashboard content, projects, activity, notifications, and alternate application states are available immediately after installation.
 
 Browser data can be reset by clearing Local Storage for the application origin.
 

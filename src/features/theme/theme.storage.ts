@@ -34,7 +34,7 @@ const isThemeProject = (value: unknown): value is ThemeProject => {
 const migrateThemeProject = (project: ThemeProject): ThemeProject => ({
   ...project,
   archivedAt: project.archivedAt ?? null,
-  basePresetId: project.basePresetId ?? project.originPresetId ?? 'minimal',
+  basePresetId: project.basePresetId ?? project.originPresetId ?? 'forge',
 })
 
 const createWorkspace = (

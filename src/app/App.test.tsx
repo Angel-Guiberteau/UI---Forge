@@ -19,17 +19,17 @@ describe('UI Forge workspace', () => {
       </ThemeProvider>,
     )
 
-    const corporatePreset = screen.getByRole('button', { name: /Corporate/ })
+    const orbitPreset = screen.getByRole('button', { name: /Orbit/ })
     const undoButton = screen.getByRole('button', { name: 'Undo last theme change' })
 
-    fireEvent.click(corporatePreset)
+    fireEvent.click(orbitPreset)
 
-    expect(corporatePreset).toHaveAttribute('aria-pressed', 'true')
+    expect(orbitPreset).toHaveAttribute('aria-pressed', 'true')
     expect(undoButton).toBeEnabled()
 
     fireEvent.click(undoButton)
 
-    expect(screen.getByRole('button', { name: /Minimal/ })).toHaveAttribute(
+    expect(screen.getByRole('button', { name: /Forge/ })).toHaveAttribute(
       'aria-pressed',
       'true',
     )
@@ -325,7 +325,7 @@ describe('UI Forge workspace', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Colors' }))
     const primaryValue = screen.getByLabelText('Primary hexadecimal value')
     fireEvent.focus(primaryValue)
-    fireEvent.change(primaryValue, { target: { value: '#F5F5F3' } })
+    fireEvent.change(primaryValue, { target: { value: '#F6F4F1' } })
     fireEvent.blur(primaryValue)
     fireEvent.click(screen.getByRole('button', { name: 'Audit' }))
 
@@ -349,7 +349,7 @@ describe('UI Forge workspace', () => {
     expect(mediumRadius).toHaveValue(20)
 
     fireEvent.click(screen.getByRole('button', { name: 'Reset' }))
-    expect(mediumRadius).toHaveValue(4)
+    expect(mediumRadius).toHaveValue(11)
   })
 
   it('confirms a full theme reset in an accessible dialog', () => {
