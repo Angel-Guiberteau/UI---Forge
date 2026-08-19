@@ -1,6 +1,7 @@
-import type { CSSProperties } from 'react'
+import { useState, type CSSProperties } from 'react'
 import type { PreviewViewport, ThemeMode } from '../../features/theme/theme.types'
 import { SpecimenApp } from '../specimen/SpecimenApp'
+import type { PreviewScenario } from '../specimen/specimen.types'
 import { PreviewToolbar } from './PreviewToolbar'
 
 type PreviewStageProps = {
@@ -17,12 +18,16 @@ export const PreviewStage = ({
   viewport,
   onModeChange,
   onViewportChange,
-}: PreviewStageProps) => (
-  <section className="preview-stage" aria-labelledby="preview-title">
+}: PreviewStageProps) => {
+  const [scenario, setScenario] = useState<PreviewScenario>('ready')
+
+  return <section className="preview-stage" aria-labelledby="preview-title">
     <PreviewToolbar
       mode={mode}
+      scenario={scenario}
       viewport={viewport}
       onModeChange={onModeChange}
+      onScenarioChange={setScenario}
       onViewportChange={onViewportChange}
     />
     <div className="preview-viewport">
@@ -34,12 +39,14 @@ export const PreviewStage = ({
       <SpecimenApp
         customProperties={customProperties}
         mode={mode}
+        scenario={scenario}
         viewport={viewport}
       />
       <div className="preview-viewport__status" aria-live="polite">
-        <span aria-hidden="true" />
-        {viewport} · {mode}
+        <span className="preview-viewport__signal" aria-hidden="true" />
+        <span>{viewport} · {mode}</span>
+        <em>· {scenario}</em>
       </div>
     </div>
   </section>
-)
+}

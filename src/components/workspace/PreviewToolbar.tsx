@@ -1,4 +1,5 @@
 import type { PreviewViewport, ThemeMode } from '../../features/theme/theme.types'
+import { PREVIEW_SCENARIOS, type PreviewScenario } from '../specimen/specimen.types'
 import { Icon, type IconName } from '../ui/Icon'
 
 const viewportOptions: Array<{
@@ -13,15 +14,19 @@ const viewportOptions: Array<{
 
 type PreviewToolbarProps = {
   mode: ThemeMode
+  scenario: PreviewScenario
   viewport: PreviewViewport
   onModeChange: (mode: ThemeMode) => void
+  onScenarioChange: (scenario: PreviewScenario) => void
   onViewportChange: (viewport: PreviewViewport) => void
 }
 
 export const PreviewToolbar = ({
   mode,
+  scenario,
   viewport,
   onModeChange,
+  onScenarioChange,
   onViewportChange,
 }: PreviewToolbarProps) => (
   <div className="preview-toolbar">
@@ -34,6 +39,17 @@ export const PreviewToolbar = ({
     </div>
 
     <div className="preview-toolbar__controls">
+      <label className="preview-scenario">
+        <span>State</span>
+        <select
+          value={scenario}
+          onChange={(event) => onScenarioChange(event.target.value as PreviewScenario)}
+        >
+          {PREVIEW_SCENARIOS.map((option) => (
+            <option key={option} value={option}>{option}</option>
+          ))}
+        </select>
+      </label>
       <div className="segmented-control" aria-label="Color mode">
         <button
           type="button"

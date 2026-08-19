@@ -49,6 +49,62 @@ describe('UI Forge workspace', () => {
     expect(screen.getByText('mobile · dark')).toBeInTheDocument()
   })
 
+  it('navigates through the specimen and exposes project actions', () => {
+    render(
+      <ThemeProvider>
+        <App />
+      </ThemeProvider>,
+    )
+
+    const specimenNavigation = screen.getByRole('navigation', { name: 'Northstar navigation' })
+    fireEvent.click(within(specimenNavigation).getByRole('button', { name: 'Projects' }))
+
+    expect(screen.getByRole('table', { name: 'Active projects' })).toBeInTheDocument()
+    const actions = screen.getByRole('button', { name: 'Actions for Atlas research' })
+    fireEvent.click(actions)
+    expect(screen.getByRole('menu')).toBeInTheDocument()
+    expect(screen.getByRole('menuitem', { name: 'Open project' })).toBeInTheDocument()
+  })
+
+  it('creates a report through an accessible modal and announces success', () => {
+    render(
+      <ThemeProvider>
+        <App />
+      </ThemeProvider>,
+    )
+
+    const createButton = screen.getByRole('button', { name: 'Create report' })
+    fireEvent.click(createButton)
+    const dialog = screen.getByRole('dialog', { name: 'Turn progress into a story.' })
+    const title = within(dialog).getByLabelText('Report title')
+
+    expect(title).toHaveFocus()
+    fireEvent.change(title, { target: { value: 'Portfolio health' } })
+    fireEvent.submit(title.closest('form')!)
+
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
+    expect(screen.getByRole('status')).toHaveTextContent('Portfolio health is ready to review.')
+    expect(createButton).toHaveFocus()
+  })
+
+  it('previews loading, empty, and error application states', () => {
+    render(
+      <ThemeProvider>
+        <App />
+      </ThemeProvider>,
+    )
+
+    const stateSelect = screen.getByLabelText('State')
+    fireEvent.change(stateSelect, { target: { value: 'loading' } })
+    expect(screen.getByLabelText('Loading dashboard')).toHaveAttribute('aria-busy', 'true')
+
+    fireEvent.change(stateSelect, { target: { value: 'empty' } })
+    expect(screen.getByRole('heading', { name: 'No projects need your attention.' })).toBeInTheDocument()
+
+    fireEvent.change(stateSelect, { target: { value: 'error' } })
+    expect(screen.getByRole('alert')).toHaveTextContent('We couldn’t load this workspace.')
+  })
+
   it('switches between mobile workspace sections', () => {
     render(
       <ThemeProvider>
