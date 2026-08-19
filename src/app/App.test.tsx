@@ -66,7 +66,7 @@ describe('UI Forge workspace', () => {
       </ThemeProvider>,
     )
 
-    fireEvent.click(screen.getByRole('button', { name: 'Export' }))
+    fireEvent.click(screen.getByRole('button', { name: 'Export current project' }))
     const dialog = screen.getByRole('dialog', { name: 'Export production tokens' })
 
     expect(within(dialog).getByLabelText('CSS export preview')).toHaveTextContent('[data-theme="dark"]')
@@ -197,7 +197,7 @@ describe('UI Forge workspace', () => {
       </ThemeProvider>,
     )
 
-    const exportButton = screen.getByRole('button', { name: 'Export' })
+    const exportButton = screen.getByRole('button', { name: 'Export current project' })
     exportButton.focus()
     fireEvent.click(exportButton)
     expect(screen.getByRole('button', { name: 'Close export dialog' })).toHaveFocus()

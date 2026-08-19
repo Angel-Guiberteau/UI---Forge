@@ -503,7 +503,7 @@
   padding: 3px 4px 3px 10px;
   border: 1px solid var(--forge-border);
   border-radius: 9px;
-  color: var(--forge-subtle);
+  color: var(--forge-muted);
   background: #191a18;
   font-size: 0.62rem;
   font-weight: 700;

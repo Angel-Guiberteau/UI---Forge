@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState, type CSSProperties } from 'react'
+import { useCallback, useEffect, useLayoutEffect, useState, type CSSProperties } from 'react'
 import { DesignPanel } from '../components/editor/DesignPanel'
 import { ExportDialog } from '../components/export/ExportDialog'
 import { ProjectLibraryDialog } from '../components/projects/ProjectLibraryDialog'
@@ -71,7 +71,7 @@ export const App = () => {
     dismissSharedTheme()
   }
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (window.matchMedia('(max-width: 700px)').matches) {
       dispatch({ type: 'view/set-viewport', viewport: 'mobile' })
     }

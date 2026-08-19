@@ -78,7 +78,7 @@ export const WorkspaceHeader = ({
       <button className="icon-button share-trigger" type="button" aria-label="Share current project" data-tooltip="Share" onClick={onShare}>
         <Icon name="link" size={17} />
       </button>
-      <button className="export-trigger" type="button" onClick={onExport}>
+      <button className="export-trigger" type="button" aria-label="Export current project" onClick={onExport}>
         <Icon name="export" size={16} />
         <span>Export</span>
       </button>

@@ -93,15 +93,27 @@ Browser data can be reset by clearing Local Storage for the application origin.
 npm run lint
 npm run test
 npm run test:e2e
+npm run audit:lighthouse
 npm run build
 npm run build:pages
 ```
 
-The test suite prioritizes theme history, project persistence and migration, accessibility calculations, export formats, shared-link validation, dialogs, keyboard focus, and important specimen interactions. Playwright validates the compiled GitHub Pages build in Chromium across desktop and mobile flows before deployment.
+The 46 Vitest tests prioritize theme history, project persistence and migration, accessibility calculations, export formats, shared-link validation, dialogs, keyboard focus, and important specimen interactions. Eight Playwright tests validate the compiled GitHub Pages build in Chromium across desktop, mobile, export, and share flows. Axe checks the primary workspace and dialogs against automated WCAG 2.0/2.1 A and AA rules.
+
+### Quality budgets
+
+| Lighthouse category | Required | Latest audit |
+| --- | ---: | ---: |
+| Performance | ≥ 90 | 100 |
+| Accessibility | 100 | 100 |
+| Best practices | 100 | 100 |
+| SEO | 100 | 100 |
+
+The performance gate also requires FCP ≤ 2.0 s, LCP ≤ 2.5 s, TBT ≤ 200 ms, CLS ≤ 0.1, and Speed Index ≤ 4.5 s. The latest local production audit measured FCP 1.4 s, LCP 1.7 s, TBT 0 ms, CLS 0, and Speed Index 1.4 s. Automated audits complement rather than replace manual assistive-technology testing.
 
 ## Deployment
 
-The repository includes a GitHub Pages workflow that runs linting, the complete test suite, and a production build before publishing. It uses `/UI---Forge/` as the production base while keeping local development at `/`.
+The repository includes a GitHub Pages workflow that runs linting, unit tests, browser journeys, Axe checks, Lighthouse budgets, and a production build before publishing. It uses `/UI---Forge/` as the production base while keeping local development at `/`.
 
 GitHub Pages publishes automatically after every push to `main`. To configure the repository from scratch:
 

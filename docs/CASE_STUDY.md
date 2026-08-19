@@ -61,10 +61,14 @@ No component framework, animation library, remote API, or paid service is requir
 - A root error boundary protects the page with a branded recovery state.
 - Invalid public routes receive a useful, responsive 404 page.
 - Automated tests cover persistence, migrations, permissions-like safeguards, history, exports, sharing, and critical interactions.
+- Axe audits the workspace and handoff dialogs against automated WCAG A and AA rules on desktop and mobile.
+- Lighthouse budgets prevent regressions in performance, accessibility, best practices, SEO, and Core Web Vitals.
+
+The final production audit reached 100 in all four Lighthouse categories. FCP measured 1.4 s, LCP 1.7 s, TBT 0 ms, CLS 0, and Speed Index 1.4 s. A mobile viewport initialization shift discovered during the audit was removed before release.
 
 ## Deployment strategy
 
-The application is a static Vite build deployed through GitHub Actions to GitHub Pages. The pipeline installs locked dependencies, runs linting and tests, builds with the repository subpath, uploads only the production artifact, and deploys through the protected `github-pages` environment.
+The application is a static Vite build deployed through GitHub Actions to GitHub Pages. The pipeline installs locked dependencies, runs linting, unit tests, Playwright journeys, Axe audits, and Lighthouse budgets, builds with the repository subpath, uploads only the production artifact, and deploys through the protected `github-pages` environment.
 
 No secrets or runtime environment variables are required.
 

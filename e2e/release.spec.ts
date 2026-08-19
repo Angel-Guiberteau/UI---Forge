@@ -50,7 +50,7 @@ test('updates the live system across preset, token, mode, and viewport changes',
 test('keeps export and share handoffs keyboard accessible', async ({ page }) => {
   await page.goto('./')
 
-  const exportTrigger = page.getByRole('button', { name: 'Export' })
+  const exportTrigger = page.getByRole('button', { name: 'Export current project' })
   await exportTrigger.click()
 
   const exportDialog = page.getByRole('dialog', { name: 'Export production tokens' })

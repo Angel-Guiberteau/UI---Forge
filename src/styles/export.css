@@ -189,7 +189,7 @@
     padding: 4px;
     border: 1px solid transparent;
     border-radius: 5px;
-    color: var(--forge-subtle);
+    color: var(--forge-muted);
     background: transparent;
     font-size: 0.55rem;
     cursor: pointer;
@@ -309,7 +309,7 @@
 
   > span:last-child {
     justify-self: end;
-    color: var(--forge-subtle);
+    color: var(--forge-muted);
     text-transform: uppercase;
   }
 }
@@ -350,7 +350,7 @@
   display: flex;
   align-items: center;
   gap: 7px;
-  color: var(--forge-subtle);
+  color: var(--forge-muted);
   font-size: 0.58rem;
 
   i {
