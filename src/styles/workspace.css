@@ -1,7 +1,10 @@
 .forge-shell {
   width: 100%;
   max-width: 100%;
-  min-height: 100vh;
+  height: 100dvh;
+  min-height: 0;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
   overflow: hidden;
   background:
     radial-gradient(circle at 82% -8%, rgb(255 59 48 / 13%), transparent 32%),
@@ -291,15 +294,16 @@
 }
 
 .forge-workspace {
-  min-height: calc(100vh - var(--forge-header-height));
+  min-height: 0;
   display: grid;
   grid-template-columns: 380px minmax(0, 1fr);
+  overflow: hidden;
 }
 
 .forge-panel {
   position: relative;
   z-index: 2;
-  height: calc(100vh - var(--forge-header-height));
+  min-height: 0;
   overflow-y: auto;
   overscroll-behavior: contain;
   scrollbar-gutter: stable;
@@ -469,6 +473,10 @@
 
 .preview-stage {
   min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
   padding: 24px;
   background: rgb(12 12 14 / 62%);
 }
@@ -565,7 +573,8 @@
 
 .preview-viewport {
   position: relative;
-  min-height: calc(100vh - 176px);
+  min-height: 0;
+  flex: 1;
   display: grid;
   place-items: center;
   overflow: auto;
@@ -620,7 +629,7 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  color: var(--forge-subtle);
+  color: var(--forge-muted);
   font-family: "SFMono-Regular", Consolas, monospace;
   font-size: 0.58rem;
   letter-spacing: 0.07em;
@@ -680,6 +689,8 @@
 
   .forge-workspace {
     grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: max-content max-content;
+    overflow-y: auto;
   }
 
   .forge-panel {
@@ -688,6 +699,10 @@
     padding: 30px 20px;
     border-right: 0;
     border-bottom: 1px solid var(--forge-border);
+  }
+
+  .preview-stage {
+    overflow: visible;
   }
 
   .preset-list {
@@ -763,8 +778,22 @@
 
   .forge-panel,
   .preview-stage {
-    min-height: calc(100dvh - var(--forge-header-height) - 68px);
+    height: 100%;
+    min-height: 0;
     padding: 26px 16px;
+  }
+
+  .preview-stage {
+    overflow: hidden;
+  }
+
+  .forge-workspace {
+    grid-template-rows: minmax(0, 1fr);
+    overflow: hidden;
+  }
+
+  .forge-panel {
+    overflow-y: auto;
   }
 
   .forge-panel__description {
@@ -795,7 +824,7 @@
   }
 
   .preview-viewport {
-    min-height: 620px;
+    min-height: 0;
     place-items: start;
     padding: 34px 12px 42px;
   }
@@ -803,7 +832,11 @@
   .preview-viewport__status {
     position: sticky;
     width: fit-content;
+    padding: 6px 8px;
+    border: 1px solid var(--forge-border);
+    border-radius: var(--forge-radius-sm);
     margin: 18px 0 -30px auto;
+    background: var(--forge-surface);
   }
 
   .mobile-workspace-nav {
