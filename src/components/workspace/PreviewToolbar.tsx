@@ -33,7 +33,7 @@ export const PreviewToolbar = ({
     <div className="preview-toolbar__heading">
       <span className="panel-index" aria-hidden="true">02</span>
       <div>
-        <p className="eyebrow">Live material test</p>
+        <p className="eyebrow">Live product preview</p>
         <h2 id="preview-title">System specimen</h2>
       </div>
     </div>

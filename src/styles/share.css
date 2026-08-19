@@ -21,8 +21,8 @@
   border-radius: var(--forge-radius-lg);
   color: var(--forge-text);
   background:
-    radial-gradient(circle at 8% 0%, rgb(242 107 63 / 9%), transparent 32%),
-    #171815;
+    radial-gradient(circle at 8% 0%, rgb(255 59 48 / 9%), transparent 32%),
+    #17171a;
   box-shadow: 0 38px 110px rgb(0 0 0 / 62%);
   animation: dialog-rise-in var(--forge-motion-dialog) var(--forge-motion-ease-out) both;
 }
@@ -71,7 +71,7 @@
     border: 1px solid #5c4136;
     border-radius: var(--forge-radius-md);
     color: var(--forge-ember-soft);
-    background: rgb(242 107 63 / 9%);
+    background: rgb(255 59 48 / 9%);
   }
 
   h2 {
@@ -179,7 +179,7 @@
     border: 1px solid var(--forge-border-strong);
     border-radius: var(--forge-radius-sm);
     color: var(--forge-ember-soft);
-    background: #111210;
+    background: #101012;
     box-shadow: inset 0 2px 7px rgb(0 0 0 / 18%);
 
     &:focus-within {
@@ -233,7 +233,7 @@
     width: 7px;
     height: 7px;
     background: var(--forge-ember);
-    box-shadow: 0 0 9px rgb(242 107 63 / 48%);
+    box-shadow: 0 0 9px rgb(255 59 48 / 48%);
   }
 
   span {
@@ -318,17 +318,17 @@
   padding: 0 13px;
   border: 1px solid #654538;
   border-radius: var(--forge-radius-sm);
-  color: #1a110d;
-  background: var(--forge-ember);
+  color: #ffffff;
+  background: var(--forge-action);
   font-size: 0.66rem;
   font-weight: 760;
   cursor: pointer;
   transition: filter 120ms ease, transform 120ms ease, box-shadow 120ms ease;
 
   &:hover {
-    filter: brightness(1.08);
+    background: var(--forge-action-hover);
     transform: translateY(-1px);
-    box-shadow: 0 7px 20px rgb(242 107 63 / 18%);
+    box-shadow: 0 7px 20px rgb(255 59 48 / 18%);
   }
 
   &:active { transform: translateY(0); }
@@ -344,8 +344,8 @@
   border-radius: var(--forge-radius-lg);
   color: var(--forge-text);
   background:
-    radial-gradient(circle at 100% 0%, rgb(242 107 63 / 10%), transparent 30%),
-    #191a17;
+    radial-gradient(circle at 100% 0%, rgb(255 59 48 / 10%), transparent 30%),
+    #19191c;
   box-shadow: 0 38px 110px rgb(0 0 0 / 62%);
   animation: dialog-rise-in var(--forge-motion-dialog) var(--forge-motion-ease-out) both;
 }
@@ -373,7 +373,7 @@
     border: 1px solid #5c4136;
     border-radius: var(--forge-radius-md);
     color: var(--forge-ember-soft);
-    background: rgb(242 107 63 / 9%);
+    background: rgb(255 59 48 / 9%);
   }
 }
 

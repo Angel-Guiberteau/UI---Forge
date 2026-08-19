@@ -6,7 +6,7 @@
   overflow: hidden;
   color: var(--forge-text);
   background:
-    radial-gradient(circle at 50% 100%, rgb(242 107 63 / 13%), transparent 34%),
+    radial-gradient(circle at 50% 100%, rgb(255 59 48 / 13%), transparent 34%),
     linear-gradient(rgb(255 255 255 / 2%) 1px, transparent 1px),
     linear-gradient(90deg, rgb(255 255 255 / 2%) 1px, transparent 1px),
     var(--forge-background);
@@ -21,8 +21,8 @@
   border: 1px solid var(--forge-border-strong);
   border-radius: var(--forge-radius-lg);
   background:
-    radial-gradient(circle at 100% 0%, rgb(242 107 63 / 11%), transparent 34%),
-    #181916;
+    radial-gradient(circle at 100% 0%, rgb(255 59 48 / 11%), transparent 34%),
+    #18181b;
   box-shadow: var(--forge-shadow-lg);
 
   &::after {
@@ -33,7 +33,7 @@
     width: 72px;
     height: 3px;
     background: var(--forge-ember);
-    box-shadow: 0 0 18px rgb(242 107 63 / 55%);
+    box-shadow: 0 0 18px rgb(255 59 48 / 55%);
   }
 
   h1 {
@@ -98,7 +98,7 @@
 
     &:first-child {
       background: var(--forge-ember);
-      box-shadow: 0 0 9px rgb(242 107 63 / 62%);
+      box-shadow: 0 0 9px rgb(255 59 48 / 62%);
     }
   }
 
@@ -141,12 +141,12 @@
 
 .fatal-card__actions .fatal-action--primary {
   border-color: #654538;
-  color: #1a110d;
-  background: var(--forge-ember);
+  color: #ffffff;
+  background: var(--forge-action);
 
   &:hover {
     border-color: #82513e;
-    background: #ff7a4f;
+    background: var(--forge-action-hover);
   }
 }
 

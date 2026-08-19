@@ -325,7 +325,7 @@ describe('UI Forge workspace', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Colors' }))
     const primaryValue = screen.getByLabelText('Primary hexadecimal value')
     fireEvent.focus(primaryValue)
-    fireEvent.change(primaryValue, { target: { value: '#F4F4F0' } })
+    fireEvent.change(primaryValue, { target: { value: '#F5F5F3' } })
     fireEvent.blur(primaryValue)
     fireEvent.click(screen.getByRole('button', { name: 'Audit' }))
 

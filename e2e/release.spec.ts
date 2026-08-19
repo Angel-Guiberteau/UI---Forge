@@ -16,7 +16,7 @@ test('loads the production workspace without browser errors', async ({ page }) =
 
   await page.goto('./')
 
-  await expect(page).toHaveTitle('UI Forge — Shape a system')
+  await expect(page).toHaveTitle('UI Forge — Design systems, in context')
   await expect(page.getByRole('heading', { name: 'Choose a character' })).toBeVisible()
   await expect(page.locator('.specimen__logo')).toContainText('Northstar')
   await expect(page.getByRole('link', { name: 'UI Forge home' })).toHaveAttribute('href', '/UI---Forge/')

@@ -21,14 +21,14 @@ describe('theme export', () => {
     expect(output).toContain('[data-theme="dark"] {')
     expect(output).toContain('--font-size-base: 16px;')
     expect(output).toContain('--type-scale-ratio: 1.2;')
-    expect(output).toContain('--color-primary: #181917;')
+    expect(output).toContain('--color-primary: #171717;')
   })
 
   it('uses root variables when exporting one mode', () => {
     const output = createCssThemeExport(project, 'dark')
 
     expect(output).toContain(':root {')
-    expect(output).toContain('--color-background: #121311;')
+    expect(output).toContain('--color-background: #111210;')
     expect(output).not.toContain('[data-theme="dark"]')
   })
 
@@ -36,7 +36,7 @@ describe('theme export', () => {
     const output = JSON.parse(createJsonThemeExport(project, 'light'))
 
     expect(output).toMatchObject({ formatVersion: 1, name: 'Órbita Design System' })
-    expect(output.themes.light.colors.primary).toBe('#181917')
+    expect(output.themes.light.colors.primary).toBe('#171717')
     expect(output.themes.dark).toBeUndefined()
     expect(output.id).toBeUndefined()
   })
@@ -50,14 +50,14 @@ describe('theme export', () => {
     expect(output).toContain('--spacing: var(--ui-forge-space-unit);')
     expect(output).toContain(':root {')
     expect(output).toContain('[data-theme="dark"] {')
-    expect(output).toContain('--ui-forge-color-background: #121311;')
+    expect(output).toContain('--ui-forge-color-background: #111210;')
   })
 
   it('uses the selected mode as root in a scoped Tailwind export', () => {
     const output = createTailwindThemeExport(project, 'dark')
 
     expect(output).toContain(':root {')
-    expect(output).toContain('--ui-forge-color-background: #121311;')
+    expect(output).toContain('--ui-forge-color-background: #111210;')
     expect(output).not.toContain('[data-theme="dark"] {')
   })
 

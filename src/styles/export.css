@@ -22,8 +22,8 @@
   border-radius: var(--forge-radius-lg);
   color: var(--forge-text);
   background:
-    radial-gradient(circle at 0% 0%, rgb(242 107 63 / 8%), transparent 28%),
-    #171815;
+    radial-gradient(circle at 0% 0%, rgb(255 59 48 / 8%), transparent 28%),
+    #17171a;
   box-shadow: 0 38px 110px rgb(0 0 0 / 62%);
   animation: dialog-rise-in var(--forge-motion-dialog) var(--forge-motion-ease-out) both;
 }
@@ -72,7 +72,7 @@
     border: 1px solid #5c4136;
     border-radius: var(--forge-radius-md);
     color: var(--forge-ember-soft);
-    background: rgb(242 107 63 / 9%);
+    background: rgb(255 59 48 / 9%);
     box-shadow: inset 0 1px rgb(255 255 255 / 5%);
   }
 
@@ -168,7 +168,7 @@
     &[aria-selected="true"] {
       border-color: #5b4237;
       color: var(--forge-ember-soft);
-      background: linear-gradient(100deg, rgb(242 107 63 / 10%), rgb(242 107 63 / 2%));
+      background: linear-gradient(100deg, rgb(255 59 48 / 10%), rgb(255 59 48 / 2%));
       box-shadow: inset 2px 0 var(--forge-ember);
     }
   }
@@ -181,7 +181,7 @@
   padding: 3px;
   border: 1px solid var(--forge-border);
   border-radius: var(--forge-radius-sm);
-  background: #151614;
+  background: #151518;
 
   button {
     min-width: 0;
@@ -262,7 +262,7 @@
   overflow: hidden;
   border: 1px solid var(--forge-border);
   border-radius: var(--forge-radius-md);
-  background: #111210;
+  background: #101012;
   box-shadow: inset 0 0 60px rgb(0 0 0 / 18%);
 
   pre {
@@ -274,7 +274,7 @@
     color: #c8cbc1;
     background:
       linear-gradient(90deg, rgb(255 255 255 / 1.3%) 1px, transparent 1px),
-      #111210;
+      #101012;
     background-size: 36px 100%;
     font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
     font-size: 0.67rem;
@@ -294,7 +294,7 @@
   gap: 10px;
   padding: 0 13px;
   border-bottom: 1px solid var(--forge-border);
-  background: #1b1c19;
+  background: #1b1b1e;
 
   strong,
   > span:last-child {
@@ -322,11 +322,11 @@
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: #4c4f47;
+    background: #4c4c54;
 
     &:first-child {
       background: var(--forge-ember);
-      box-shadow: 0 0 7px rgb(242 107 63 / 45%);
+      box-shadow: 0 0 7px rgb(255 59 48 / 45%);
     }
   }
 }
@@ -338,7 +338,7 @@
   gap: 16px;
   padding: 12px 13px;
   border-top: 1px solid var(--forge-border);
-  background: #1b1c19;
+  background: #1b1b1e;
 
   > div {
     display: flex;
@@ -410,11 +410,11 @@
 
 .export-action--primary {
   border-color: #654538;
-  color: #1a110d;
-  background: var(--forge-ember);
+  color: #ffffff;
+  background: var(--forge-action);
 
   &:hover {
-    filter: brightness(1.08);
+    background: var(--forge-action-hover);
   }
 }
 
@@ -441,7 +441,7 @@
     z-index: 2;
     top: 0;
     min-height: 70px;
-    background: #191a18;
+    background: #18181b;
   }
 
   .export-dialog__identity h2 {

@@ -34,8 +34,8 @@ export const WorkspaceHeader = ({
     <a className="brand" href={import.meta.env.BASE_URL} aria-label="UI Forge home">
       <ForgeMark />
       <span className="brand__copy">
-        <strong>UI Forge</strong>
-        <small>Design system lab</small>
+        <strong>UI <span>Forge</span></strong>
+        <small>Design system studio</small>
       </span>
     </a>
 

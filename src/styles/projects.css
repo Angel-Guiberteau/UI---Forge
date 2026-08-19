@@ -21,8 +21,8 @@
   border-radius: var(--forge-radius-lg);
   color: var(--forge-text);
   background:
-    radial-gradient(circle at 0% 0%, rgb(242 107 63 / 8%), transparent 28%),
-    #171815;
+    radial-gradient(circle at 0% 0%, rgb(255 59 48 / 8%), transparent 28%),
+    #17171a;
   box-shadow: 0 38px 110px rgb(0 0 0 / 62%);
   animation: dialog-rise-in var(--forge-motion-dialog) var(--forge-motion-ease-out) both;
 }
@@ -71,7 +71,7 @@
     border: 1px solid #5c4136;
     border-radius: var(--forge-radius-md);
     color: var(--forge-ember-soft);
-    background: rgb(242 107 63 / 9%);
+    background: rgb(255 59 48 / 9%);
   }
 
   h2 {
@@ -97,7 +97,7 @@
   padding: 3px;
   border: 1px solid var(--forge-border);
   border-radius: var(--forge-radius-sm);
-  background: #151614;
+  background: #151518;
 
   button {
     min-height: 32px;
@@ -162,7 +162,7 @@
 
   &[data-current="true"] {
     border-color: #5c4439;
-    background: linear-gradient(120deg, rgb(242 107 63 / 8%), rgb(255 255 255 / 1.5%));
+    background: linear-gradient(120deg, rgb(255 59 48 / 8%), rgb(255 255 255 / 1.5%));
     box-shadow: inset 3px 0 var(--forge-ember);
   }
 }
@@ -249,7 +249,7 @@
     height: 5px;
     border-radius: 50%;
     background: var(--forge-ember);
-    box-shadow: 0 0 7px rgb(242 107 63 / 52%);
+    box-shadow: 0 0 7px rgb(255 59 48 / 52%);
   }
 }
 
@@ -321,10 +321,10 @@
 
 .project-action--primary {
   border-color: #654538;
-  color: #1a110d;
-  background: var(--forge-ember);
+  color: #ffffff;
+  background: var(--forge-action);
 
-  &:hover { filter: brightness(1.08); }
+  &:hover { background: var(--forge-action-hover); }
 }
 
 .project-action--danger {
@@ -394,7 +394,7 @@
   border: 1px solid var(--forge-border-strong);
   border-radius: var(--forge-radius-lg);
   color: var(--forge-text);
-  background: #1a1b18;
+  background: #1a1a1d;
   box-shadow: 0 38px 110px rgb(0 0 0 / 62%);
   animation: dialog-rise-in var(--forge-motion-dialog) var(--forge-motion-ease-out) both;
 

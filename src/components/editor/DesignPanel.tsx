@@ -25,7 +25,7 @@ const editorSections: Array<{
 ]
 
 const sectionDetails: Record<ThemeEditorSection, { eyebrow: string; title: string; description: string }> = {
-  presets: { eyebrow: 'Starting material', title: 'Choose a character', description: 'A complete visual direction for both modes.' },
+  presets: { eyebrow: 'Visual direction', title: 'Choose a character', description: 'A complete visual direction for both modes.' },
   colors: { eyebrow: 'Color system', title: 'Set the atmosphere', description: 'Semantic colors keep the interface coherent.' },
   typography: { eyebrow: 'Type system', title: 'Shape the voice', description: 'Control hierarchy, rhythm, and readability.' },
   radius: { eyebrow: 'Geometry', title: 'Define the edges', description: 'A consistent curve language across components.' },

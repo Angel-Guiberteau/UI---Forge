@@ -1,28 +1,30 @@
 :root {
-  color: #ecece5;
-  background: #111210;
+  color: #f5f5f7;
+  background: #101012;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
-  --forge-background: #111210;
-  --forge-surface: #191a18;
-  --forge-surface-raised: #21221f;
-  --forge-surface-bright: #292a26;
-  --forge-border: #30322d;
-  --forge-border-strong: #444740;
-  --forge-text: #ecece5;
-  --forge-muted: #95988f;
-  --forge-subtle: #676a63;
-  --forge-ember: #f26b3f;
-  --forge-ember-soft: #ff9a78;
-  --forge-focus: #ffb197;
-  --forge-success: #83b895;
-  --forge-radius-xs: 4px;
-  --forge-radius-sm: 7px;
-  --forge-radius-md: 12px;
-  --forge-radius-lg: 18px;
-  --forge-shadow-sm: 0 4px 14px rgb(0 0 0 / 18%);
-  --forge-shadow-lg: 0 28px 80px rgb(0 0 0 / 34%);
+  --forge-background: #101012;
+  --forge-surface: #18181b;
+  --forge-surface-raised: #202024;
+  --forge-surface-bright: #29292e;
+  --forge-border: #303036;
+  --forge-border-strong: #484850;
+  --forge-text: #f5f5f7;
+  --forge-muted: #aaaab2;
+  --forge-subtle: #85858e;
+  --forge-ember: #ff3b30;
+  --forge-ember-soft: #ff8a82;
+  --forge-action: #c9251d;
+  --forge-action-hover: #d52b22;
+  --forge-focus: #ff9e98;
+  --forge-success: #67c98d;
+  --forge-radius-xs: 7px;
+  --forge-radius-sm: 10px;
+  --forge-radius-md: 16px;
+  --forge-radius-lg: 22px;
+  --forge-shadow-sm: 0 8px 24px rgb(0 0 0 / 22%);
+  --forge-shadow-lg: 0 32px 100px rgb(0 0 0 / 46%);
   --forge-motion-dialog: 90ms;
   --forge-motion-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --forge-header-height: 76px;
@@ -72,7 +74,7 @@ select:focus-visible {
 }
 
 ::selection {
-  color: #17110e;
+  color: #ffffff;
   background: var(--forge-ember-soft);
 }
 
@@ -88,7 +90,7 @@ select:focus-visible {
 ::-webkit-scrollbar-thumb {
   border: 3px solid transparent;
   border-radius: 999px;
-  background: #464940;
+  background: #4a4a52;
   background-clip: padding-box;
 }
 
@@ -121,9 +123,9 @@ select:focus-visible {
     translate: 50% -4px;
     padding: 5px 7px;
     border: 1px solid var(--forge-border-strong);
-    border-radius: var(--forge-radius-xs);
+    border-radius: var(--forge-radius-sm);
     color: var(--forge-text);
-    background: #252622;
+    background: #242428;
     box-shadow: var(--forge-shadow-sm);
     font-size: 0.68rem;
     font-weight: 600;

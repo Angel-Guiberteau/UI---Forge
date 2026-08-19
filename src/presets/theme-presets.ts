@@ -51,23 +51,23 @@ export const themePresets = [
   {
     id: 'minimal',
     name: 'Minimal',
-    description: 'Quiet contrast, precise spacing, and almost no decoration.',
+    description: 'Swiss restraint, optical spacing, and disciplined monochrome.',
     themes: {
       light: createTokens(
         {
-          primary: '#181917', secondary: '#696c66', background: '#f4f4f0',
-          surface: '#ffffff', surfaceElevated: '#ffffff', text: '#181917',
-          textMuted: '#686a65', border: '#d9dad4', success: '#27744b',
-          warning: '#93651c', danger: '#b23838',
+          primary: '#171717', secondary: '#606060', background: '#f5f5f3',
+          surface: '#ffffff', surfaceElevated: '#fafaf8', text: '#171717',
+          textMuted: '#62625f', border: '#898985', success: '#25704a',
+          warning: '#895b12', danger: '#aa3333',
         },
         { radius: { small: 2, medium: 4, large: 8, pill: 999 }, shadows: { color: '#181917', opacity: 0.08, blur: 16, spread: -8, offsetY: 8 } },
       ),
       dark: createTokens(
         {
-          primary: '#f1f2ed', secondary: '#a4a69f', background: '#121311',
-          surface: '#1a1b18', surfaceElevated: '#22231f', text: '#f1f2ed',
-          textMuted: '#a4a69f', border: '#343630', success: '#67bd8b',
-          warning: '#e2b760', danger: '#ef7c78',
+          primary: '#f3f3ef', secondary: '#b4b4ad', background: '#111210',
+          surface: '#1a1b18', surfaceElevated: '#242521', text: '#f3f3ef',
+          textMuted: '#aaa9a3', border: '#666861', success: '#72c996',
+          warning: '#e5bc6e', danger: '#f18a86',
         },
         { radius: { small: 2, medium: 4, large: 8, pill: 999 }, shadows: { color: '#000000', opacity: 0.32, blur: 20, spread: -8, offsetY: 10 } },
       ),
@@ -76,46 +76,46 @@ export const themePresets = [
   {
     id: 'corporate',
     name: 'Corporate',
-    description: 'Structured, dependable, and tuned for data-heavy products.',
+    description: 'Confident blue, compact data density, and executive clarity.',
     themes: {
-      light: createTokens({ primary: '#1456d9', secondary: '#50627d', background: '#f2f5fa', surface: '#ffffff', surfaceElevated: '#ffffff', text: '#142033', textMuted: '#607089', border: '#cfdaea', success: '#14734b', warning: '#9a6412', danger: '#bd3037' }, { radius: { small: 4, medium: 7, large: 12, pill: 999 }, spacing: { baseUnit: 4, density: 0.95 } }),
-      dark: createTokens({ primary: '#78a6ff', secondary: '#9cabc1', background: '#0c1420', surface: '#131e2d', surfaceElevated: '#1a283a', text: '#edf3fc', textMuted: '#9cabc1', border: '#2a3c54', success: '#5fc798', warning: '#efbd61', danger: '#f27d83' }, { radius: { small: 4, medium: 7, large: 12, pill: 999 }, spacing: { baseUnit: 4, density: 0.95 } }),
+      light: createTokens({ primary: '#1554c0', secondary: '#4c617f', background: '#f3f6fb', surface: '#ffffff', surfaceElevated: '#f9fbff', text: '#111c2f', textMuted: '#566a86', border: '#758aa5', success: '#13704a', warning: '#875709', danger: '#b52f3b' }, { radius: { small: 5, medium: 8, large: 14, pill: 999 }, spacing: { baseUnit: 4, density: 0.92 }, shadows: { color: '#142b50', opacity: 0.13, blur: 22, spread: -9, offsetY: 10 } }),
+      dark: createTokens({ primary: '#8ab2ff', secondary: '#a6b7ce', background: '#09111e', surface: '#111d2c', surfaceElevated: '#19283b', text: '#f0f5fc', textMuted: '#aab8cb', border: '#53677f', success: '#67d19f', warning: '#f0c36e', danger: '#f38991' }, { radius: { small: 5, medium: 8, large: 14, pill: 999 }, spacing: { baseUnit: 4, density: 0.92 }, shadows: { color: '#000814', opacity: 0.36, blur: 28, spread: -10, offsetY: 14 } }),
     },
   },
   {
     id: 'playful',
     name: 'Playful',
-    description: 'Buoyant color, generous curves, and a relaxed rhythm.',
+    description: 'Candy color, expressive scale, and soft tactile geometry.',
     themes: {
-      light: createTokens({ primary: '#6c3cf0', secondary: '#ec5e9c', background: '#fff8e8', surface: '#ffffff', surfaceElevated: '#fffdf7', text: '#292239', textMuted: '#746b82', border: '#e5d9f0', success: '#25845a', warning: '#a86605', danger: '#c83b5c' }, { typography: { fontFamily: systemSans, displayFontFamily: systemSans, baseSize: 16, scaleRatio: 1.25, lineHeight: 1.55, headingWeight: 750, bodyWeight: 450 }, radius: { small: 10, medium: 16, large: 28, pill: 999 }, spacing: { baseUnit: 5, density: 1.05 } }),
-      dark: createTokens({ primary: '#a98bff', secondary: '#ff8cba', background: '#191425', surface: '#241d33', surfaceElevated: '#302641', text: '#fff8f0', textMuted: '#bdb0cb', border: '#463855', success: '#62d49b', warning: '#ffc66a', danger: '#ff849d' }, { typography: { fontFamily: systemSans, displayFontFamily: systemSans, baseSize: 16, scaleRatio: 1.25, lineHeight: 1.55, headingWeight: 750, bodyWeight: 450 }, radius: { small: 10, medium: 16, large: 28, pill: 999 }, spacing: { baseUnit: 5, density: 1.05 } }),
+      light: createTokens({ primary: '#6831cf', secondary: '#c83278', background: '#fff7e8', surface: '#ffffff', surfaceElevated: '#fffaf1', text: '#282034', textMuted: '#695e75', border: '#8e829b', success: '#247550', warning: '#8c5800', danger: '#b83256' }, { typography: { fontFamily: systemSans, displayFontFamily: systemSans, baseSize: 16, scaleRatio: 1.28, lineHeight: 1.55, headingWeight: 780, bodyWeight: 450 }, radius: { small: 12, medium: 19, large: 32, pill: 999 }, spacing: { baseUnit: 5, density: 1.08 }, shadows: { color: '#6b36a8', opacity: 0.15, blur: 30, spread: -10, offsetY: 14 } }),
+      dark: createTokens({ primary: '#b69aff', secondary: '#ff8fbd', background: '#171120', surface: '#231a30', surfaceElevated: '#30213f', text: '#fff9f2', textMuted: '#c1b4cb', border: '#756486', success: '#6cd8a3', warning: '#ffd079', danger: '#ff8fa8' }, { typography: { fontFamily: systemSans, displayFontFamily: systemSans, baseSize: 16, scaleRatio: 1.28, lineHeight: 1.55, headingWeight: 780, bodyWeight: 450 }, radius: { small: 12, medium: 19, large: 32, pill: 999 }, spacing: { baseUnit: 5, density: 1.08 }, shadows: { color: '#c084fc', opacity: 0.19, blur: 34, spread: -12, offsetY: 14 } }),
     },
   },
   {
     id: 'luxury',
     name: 'Luxury',
-    description: 'Editorial restraint with warm metal accents and deep surfaces.',
+    description: 'Gallery restraint, bronze accents, and tailored proportions.',
     themes: {
-      light: createTokens({ primary: '#7c5325', secondary: '#766c60', background: '#f3efe7', surface: '#fbf9f4', surfaceElevated: '#ffffff', text: '#241f19', textMuted: '#746c62', border: '#d9d0c3', success: '#4d7458', warning: '#8c6529', danger: '#943f3a' }, { typography: { fontFamily: systemSans, displayFontFamily: editorialSerif, baseSize: 16, scaleRatio: 1.333, lineHeight: 1.6, headingWeight: 600, bodyWeight: 400 }, radius: { small: 0, medium: 2, large: 4, pill: 999 }, spacing: { baseUnit: 5, density: 1.1 } }),
-      dark: createTokens({ primary: '#d5ad6d', secondary: '#aaa096', background: '#15120f', surface: '#1d1915', surfaceElevated: '#28221c', text: '#f2eadf', textMuted: '#aaa096', border: '#3e352c', success: '#81a98a', warning: '#d5ad6d', danger: '#ce7770' }, { typography: { fontFamily: systemSans, displayFontFamily: editorialSerif, baseSize: 16, scaleRatio: 1.333, lineHeight: 1.6, headingWeight: 600, bodyWeight: 400 }, radius: { small: 0, medium: 2, large: 4, pill: 999 }, spacing: { baseUnit: 5, density: 1.1 }, shadows: { color: '#000000', opacity: 0.4, blur: 36, spread: -12, offsetY: 18 } }),
+      light: createTokens({ primary: '#704510', secondary: '#6e6254', background: '#f3eee5', surface: '#fbf8f2', surfaceElevated: '#ffffff', text: '#211b15', textMuted: '#6a6056', border: '#8d8174', success: '#456d50', warning: '#7d571d', danger: '#8f3936' }, { typography: { fontFamily: systemSans, displayFontFamily: editorialSerif, baseSize: 16, scaleRatio: 1.38, lineHeight: 1.62, headingWeight: 600, bodyWeight: 400 }, radius: { small: 1, medium: 3, large: 6, pill: 999 }, spacing: { baseUnit: 5, density: 1.12 }, shadows: { color: '#3b2b19', opacity: 0.11, blur: 34, spread: -13, offsetY: 16 } }),
+      dark: createTokens({ primary: '#e0b875', secondary: '#b7aa9a', background: '#120f0c', surface: '#1d1813', surfaceElevated: '#292119', text: '#f5ecdf', textMuted: '#b8ab9c', border: '#7c6a56', success: '#8aba94', warning: '#e0b875', danger: '#d9827b' }, { typography: { fontFamily: systemSans, displayFontFamily: editorialSerif, baseSize: 16, scaleRatio: 1.38, lineHeight: 1.62, headingWeight: 600, bodyWeight: 400 }, radius: { small: 1, medium: 3, large: 6, pill: 999 }, spacing: { baseUnit: 5, density: 1.12 }, shadows: { color: '#000000', opacity: 0.46, blur: 42, spread: -14, offsetY: 20 } }),
     },
   },
   {
     id: 'cyber',
     name: 'Cyber',
-    description: 'Dense technical surfaces with electric, high-signal accents.',
+    description: 'Terminal precision, luminous signal, and zero-radius density.',
     themes: {
-      light: createTokens({ primary: '#005f54', secondary: '#425c62', background: '#e7f0ed', surface: '#f7fbf9', surfaceElevated: '#ffffff', text: '#112522', textMuted: '#536965', border: '#b8ccc7', success: '#08754f', warning: '#8a6500', danger: '#b72f43' }, { typography: { fontFamily: mono, displayFontFamily: mono, baseSize: 15, scaleRatio: 1.18, lineHeight: 1.5, headingWeight: 700, bodyWeight: 400 }, radius: { small: 0, medium: 0, large: 0, pill: 0 }, spacing: { baseUnit: 4, density: 0.9 } }),
-      dark: createTokens({ primary: '#4dffd2', secondary: '#60a5fa', background: '#07100f', surface: '#0c1917', surfaceElevated: '#11231f', text: '#dffef5', textMuted: '#81aaa0', border: '#21423b', success: '#4dffd2', warning: '#ffe16a', danger: '#ff627d' }, { typography: { fontFamily: mono, displayFontFamily: mono, baseSize: 15, scaleRatio: 1.18, lineHeight: 1.5, headingWeight: 700, bodyWeight: 400 }, radius: { small: 0, medium: 0, large: 0, pill: 0 }, spacing: { baseUnit: 4, density: 0.9 }, shadows: { color: '#4dffd2', opacity: 0.16, blur: 28, spread: -10, offsetY: 0 } }),
+      light: createTokens({ primary: '#006357', secondary: '#315d67', background: '#e9f1ef', surface: '#f8fbfa', surfaceElevated: '#ffffff', text: '#0d2421', textMuted: '#47645f', border: '#5f847d', success: '#08734e', warning: '#795900', danger: '#ac2c41' }, { typography: { fontFamily: mono, displayFontFamily: mono, baseSize: 15, scaleRatio: 1.16, lineHeight: 1.48, headingWeight: 700, bodyWeight: 400 }, radius: { small: 0, medium: 0, large: 0, pill: 0 }, spacing: { baseUnit: 4, density: 0.86 }, controls: { height: 38, borderWidth: 1, focusRingWidth: 2 } }),
+      dark: createTokens({ primary: '#55f5cd', secondary: '#73b8ff', background: '#050d0c', surface: '#0a1815', surfaceElevated: '#10241f', text: '#e2fff7', textMuted: '#8fb9af', border: '#456d64', success: '#55f5cd', warning: '#ffe071', danger: '#ff7188' }, { typography: { fontFamily: mono, displayFontFamily: mono, baseSize: 15, scaleRatio: 1.16, lineHeight: 1.48, headingWeight: 700, bodyWeight: 400 }, radius: { small: 0, medium: 0, large: 0, pill: 0 }, spacing: { baseUnit: 4, density: 0.86 }, shadows: { color: '#55f5cd', opacity: 0.18, blur: 30, spread: -11, offsetY: 0 }, controls: { height: 38, borderWidth: 1, focusRingWidth: 2 } }),
     },
   },
   {
     id: 'editorial',
     name: 'Editorial',
-    description: 'Typographic hierarchy, crisp rules, and measured whitespace.',
+    description: 'Newspaper hierarchy, inked rules, and generous reading rhythm.',
     themes: {
-      light: createTokens({ primary: '#b53a27', secondary: '#536376', background: '#f4f0e8', surface: '#faf8f3', surfaceElevated: '#ffffff', text: '#191816', textMuted: '#6c6861', border: '#cec8bd', success: '#3d7652', warning: '#92621c', danger: '#b53a27' }, { typography: { fontFamily: systemSans, displayFontFamily: editorialSerif, baseSize: 17, scaleRatio: 1.414, lineHeight: 1.65, headingWeight: 700, bodyWeight: 400 }, radius: { small: 0, medium: 0, large: 0, pill: 999 }, spacing: { baseUnit: 6, density: 1.05 }, shadows: { color: '#191816', opacity: 0.07, blur: 0, spread: 0, offsetY: 1 } }),
-      dark: createTokens({ primary: '#f0785e', secondary: '#93a6ba', background: '#171614', surface: '#201e1b', surfaceElevated: '#292621', text: '#f3eee5', textMuted: '#aaa49b', border: '#403c36', success: '#77b48c', warning: '#e1b263', danger: '#f0785e' }, { typography: { fontFamily: systemSans, displayFontFamily: editorialSerif, baseSize: 17, scaleRatio: 1.414, lineHeight: 1.65, headingWeight: 700, bodyWeight: 400 }, radius: { small: 0, medium: 0, large: 0, pill: 999 }, spacing: { baseUnit: 6, density: 1.05 }, shadows: { color: '#000000', opacity: 0.25, blur: 0, spread: 0, offsetY: 1 } }),
+      light: createTokens({ primary: '#a82f24', secondary: '#465e78', background: '#f2eee5', surface: '#faf8f2', surfaceElevated: '#ffffff', text: '#181714', textMuted: '#625f59', border: '#89847c', success: '#376e4c', warning: '#805618', danger: '#a82f24' }, { typography: { fontFamily: systemSans, displayFontFamily: editorialSerif, baseSize: 17, scaleRatio: 1.44, lineHeight: 1.68, headingWeight: 700, bodyWeight: 400 }, radius: { small: 0, medium: 0, large: 0, pill: 999 }, spacing: { baseUnit: 6, density: 1.08 }, shadows: { color: '#191816', opacity: 0.09, blur: 0, spread: 0, offsetY: 1 } }),
+      dark: createTokens({ primary: '#ff8972', secondary: '#9eb5cb', background: '#151412', surface: '#201e1b', surfaceElevated: '#2a2722', text: '#f5efe6', textMuted: '#b5aea3', border: '#676159', success: '#82bf96', warning: '#e6b96d', danger: '#ff8972' }, { typography: { fontFamily: systemSans, displayFontFamily: editorialSerif, baseSize: 17, scaleRatio: 1.44, lineHeight: 1.68, headingWeight: 700, bodyWeight: 400 }, radius: { small: 0, medium: 0, large: 0, pill: 999 }, spacing: { baseUnit: 6, density: 1.08 }, shadows: { color: '#000000', opacity: 0.3, blur: 0, spread: 0, offsetY: 1 } }),
     },
   },
 ] satisfies ThemePreset[]
