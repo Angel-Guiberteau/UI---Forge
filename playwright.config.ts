@@ -13,7 +13,7 @@ export default defineConfig({
     channel: 'chrome',
     screenshot: 'only-on-failure',
     trace: 'retain-on-failure',
-    video: 'retain-on-failure',
+    video: process.env.CI ? 'off' : 'retain-on-failure',
   },
   webServer: {
     command: 'npm run preview -- --base /UI---Forge/ --host 127.0.0.1 --port 4173',
