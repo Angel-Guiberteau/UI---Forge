@@ -1,8 +1,10 @@
 # UI Forge
 
+[![Deploy UI Forge to GitHub Pages](https://github.com/Angel-Guiberteau/UI---Forge/actions/workflows/deploy-pages.yml/badge.svg)](https://github.com/Angel-Guiberteau/UI---Forge/actions/workflows/deploy-pages.yml)
+
 UI Forge is an interactive design-system laboratory for shaping visual tokens and testing them against a complete product interface in real time.
 
-**Prepared demo URL:** [angel-guiberteau.github.io/UI---Forge](https://angel-guiberteau.github.io/UI---Forge/)
+**Live demo:** [angel-guiberteau.github.io/UI---Forge](https://angel-guiberteau.github.io/UI---Forge/)
 
 The project is built as a portfolio-grade frontend product rather than a collection of disconnected component examples. Every change is evaluated inside Northstar, a fictional operations application with navigation, dashboards, tables, forms, dialogs, feedback, and deliberately varied UI states.
 
@@ -99,7 +101,7 @@ The test suite prioritizes theme history, project persistence and migration, acc
 
 The repository includes a GitHub Pages workflow that runs linting, the complete test suite, and a production build before publishing. It uses `/UI---Forge/` as the production base while keeping local development at `/`.
 
-To publish the prepared demo:
+GitHub Pages publishes automatically after every push to `main`. To configure the repository from scratch:
 
 1. Open the repository settings on GitHub.
 2. In **Pages**, select **GitHub Actions** as the build source.
@@ -117,7 +119,7 @@ The production artifact includes the branded 404 page, sitemap, robots file, soc
 
 ## Project status
 
-Release candidate. The frontend product, developer handoff, recovery states, deployment workflow, and portfolio case study are complete. Publishing only requires enabling GitHub Pages and pushing the prepared `main` branch.
+Public release. The frontend product, developer handoff, recovery states, deployment workflow, portfolio case study, and public demo are complete.
 
 ## Author
 
