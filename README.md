@@ -40,6 +40,7 @@ Demonstrate product design, React architecture, TypeScript, complex client state
 - Vite 8
 - Native CSS with semantic design tokens and nesting
 - Vitest and Testing Library
+- Playwright
 - Browser Local Storage
 
 No component library or animation dependency is used. The visual system and interactions are implemented specifically for UI Forge.
@@ -91,11 +92,12 @@ Browser data can be reset by clearing Local Storage for the application origin.
 ```bash
 npm run lint
 npm run test
+npm run test:e2e
 npm run build
 npm run build:pages
 ```
 
-The test suite prioritizes theme history, project persistence and migration, accessibility calculations, export formats, shared-link validation, dialogs, keyboard focus, and important specimen interactions.
+The test suite prioritizes theme history, project persistence and migration, accessibility calculations, export formats, shared-link validation, dialogs, keyboard focus, and important specimen interactions. Playwright validates the compiled GitHub Pages build in Chromium across desktop and mobile flows before deployment.
 
 ## Deployment
 

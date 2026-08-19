@@ -31,7 +31,7 @@ export const WorkspaceHeader = ({
   onExport,
 }: WorkspaceHeaderProps) => (
   <header className="forge-header">
-    <a className="brand" href="/" aria-label="UI Forge home">
+    <a className="brand" href={import.meta.env.BASE_URL} aria-label="UI Forge home">
       <ForgeMark />
       <span className="brand__copy">
         <strong>UI Forge</strong>

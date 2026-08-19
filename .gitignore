@@ -9,3 +9,5 @@ dist/
 .idea/
 .vscode/
 coverage/
+playwright-report/
+test-results/
