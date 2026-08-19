@@ -12,6 +12,8 @@ The export workspace packages the current system as framework-neutral CSS variab
 
 The project library supports creating, switching, duplicating, archiving, and restoring design systems. Each project keeps its own light and dark themes in browser storage, and existing single-project workspaces migrate automatically to the library format.
 
+Versioned share links package a complete theme snapshot directly into the URL, so they work without an account or remote storage. Received themes are validated before rendering and require an explicit import, which creates a new local project without replacing existing work.
+
 ## Development
 
 ```bash

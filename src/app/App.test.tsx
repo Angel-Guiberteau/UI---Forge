@@ -1,11 +1,15 @@
 import { fireEvent, render, screen, waitFor, within } from '@testing-library/react'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { createThemeShareUrl, readThemeShare } from '../features/share/theme.share'
+import { createThemeProject } from '../features/theme/theme.factory'
 import { ThemeProvider } from '../features/theme/ThemeProvider'
+import { themePresets } from '../presets/theme-presets'
 import { App } from './App'
 
 describe('UI Forge workspace', () => {
   beforeEach(() => {
     window.localStorage.clear()
+    window.history.replaceState({}, '', '/')
   })
 
   it('applies a preset and makes the change reversible', () => {
@@ -74,6 +78,74 @@ describe('UI Forge workspace', () => {
     expect(writeText.mock.calls[0][0]).toContain('"dark"')
     expect(writeText.mock.calls[0][0]).not.toContain('"light"')
     expect(within(dialog).getByText('Copied to clipboard')).toBeInTheDocument()
+  })
+
+  it('creates and copies a validated self-contained share link', async () => {
+    const writeText = vi.fn().mockResolvedValue(undefined)
+    Object.defineProperty(navigator, 'clipboard', {
+      configurable: true,
+      value: { writeText },
+    })
+
+    render(
+      <ThemeProvider>
+        <App />
+      </ThemeProvider>,
+    )
+
+    const shareButton = screen.getByRole('button', { name: 'Share current project' })
+    shareButton.focus()
+    fireEvent.click(shareButton)
+    const dialog = screen.getByRole('dialog', { name: 'Share this system' })
+    const shareUrl = within(dialog).getByLabelText('Private share link')
+
+    expect(readThemeShare(new URL((shareUrl as HTMLInputElement).value).hash).status).toBe('ready')
+    fireEvent.click(within(dialog).getByRole('button', { name: 'Copy share link' }))
+
+    await waitFor(() => expect(writeText).toHaveBeenCalledOnce())
+    expect(within(dialog).getByText('Link copied')).toBeInTheDocument()
+
+    fireEvent.keyDown(document, { key: 'Escape' })
+    expect(shareButton).toHaveFocus()
+  })
+
+  it('imports a shared theme as a new local project', () => {
+    const sharedProject = createThemeProject(themePresets[4], {
+      name: 'Shared cyber system',
+    })
+    const shareUrl = createThemeShareUrl(sharedProject, window.location.href)
+    window.history.replaceState({}, '', new URL(shareUrl).hash)
+
+    render(
+      <ThemeProvider>
+        <App />
+      </ThemeProvider>,
+    )
+
+    const dialog = screen.getByRole('dialog', { name: 'Add Shared cyber system to your forge?' })
+    expect(within(dialog).getByLabelText('Shared light and dark theme preview')).toBeInTheDocument()
+    fireEvent.click(within(dialog).getByRole('button', { name: 'Add to library' }))
+
+    expect(screen.getByDisplayValue('Shared cyber system')).toBeInTheDocument()
+    expect(screen.getByRole('status')).toHaveTextContent('was added to your local library')
+    expect(window.location.hash).toBe('')
+  })
+
+  it('handles an invalid shared theme without changing the workspace', () => {
+    window.history.replaceState({}, '', '/#share=damaged')
+
+    render(
+      <ThemeProvider>
+        <App />
+      </ThemeProvider>,
+    )
+
+    const dialog = screen.getByRole('dialog', { name: 'This theme link can’t be opened.' })
+    expect(within(dialog).getByText(/existing projects have not been changed/)).toBeInTheDocument()
+    fireEvent.click(within(dialog).getByRole('button', { name: 'Continue to UI Forge' }))
+
+    expect(screen.getByDisplayValue('Untitled system')).toBeInTheDocument()
+    expect(window.location.hash).toBe('')
   })
 
   it('creates and switches between locally stored theme projects', () => {

@@ -284,6 +284,10 @@
   }
 }
 
+.share-trigger {
+  color: var(--forge-ember-soft);
+}
+
 .forge-workspace {
   min-height: calc(100vh - var(--forge-header-height));
   display: grid;
@@ -845,5 +849,11 @@
         }
       }
     }
+  }
+}
+
+@media (max-width: 420px) {
+  .brand__copy {
+    display: none;
   }
 }

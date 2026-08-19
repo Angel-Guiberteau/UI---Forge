@@ -12,6 +12,7 @@ type WorkspaceHeaderProps = {
   onUndo: () => void
   onRedo: () => void
   onOpenLibrary: () => void
+  onShare: () => void
   onExport: () => void
 }
 
@@ -26,6 +27,7 @@ export const WorkspaceHeader = ({
   onUndo,
   onRedo,
   onOpenLibrary,
+  onShare,
   onExport,
 }: WorkspaceHeaderProps) => (
   <header className="forge-header">
@@ -72,6 +74,9 @@ export const WorkspaceHeader = ({
         <Icon name="folder" size={16} />
         <span>Projects</span>
         <strong aria-hidden="true">{projectCount}</strong>
+      </button>
+      <button className="icon-button share-trigger" type="button" aria-label="Share current project" data-tooltip="Share" onClick={onShare}>
+        <Icon name="link" size={17} />
       </button>
       <button className="export-trigger" type="button" onClick={onExport}>
         <Icon name="export" size={16} />
