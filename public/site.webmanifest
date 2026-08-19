@@ -2,7 +2,8 @@
   "name": "UI Forge",
   "short_name": "UI Forge",
   "description": "Shape and test cohesive design systems in real time.",
-  "start_url": "/",
+  "start_url": ".",
+  "scope": "./",
   "display": "standalone",
   "orientation": "any",
   "categories": ["design", "developer", "productivity"],
@@ -10,7 +11,7 @@
   "theme_color": "#111210",
   "icons": [
     {
-      "src": "/favicon.svg",
+      "src": "favicon.svg",
       "sizes": "any",
       "type": "image/svg+xml"
     }

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://angel-guiberteau.github.io/UI---Forge/sitemap.xml

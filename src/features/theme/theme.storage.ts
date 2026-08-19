@@ -13,7 +13,7 @@ type StoredWorkspace = ThemeWorkspace & {
   project?: ThemeProject
 }
 
-export type StorageAdapter = Pick<Storage, 'getItem' | 'setItem'>
+export type StorageAdapter = Pick<Storage, 'getItem' | 'removeItem' | 'setItem'>
 
 const isThemeProject = (value: unknown): value is ThemeProject => {
   if (!value || typeof value !== 'object') {
@@ -90,6 +90,15 @@ export const saveThemeWorkspace = (
     }
 
     storage.setItem(STORAGE_KEY, JSON.stringify(storedWorkspace))
+    return true
+  } catch {
+    return false
+  }
+}
+
+export const clearThemeWorkspace = (storage: StorageAdapter): boolean => {
+  try {
+    storage.removeItem(STORAGE_KEY)
     return true
   } catch {
     return false

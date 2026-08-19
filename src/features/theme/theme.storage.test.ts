@@ -1,6 +1,11 @@
 import { describe, expect, it } from 'vitest'
 import { createThemeProject } from './theme.factory'
-import { loadThemeWorkspace, saveThemeWorkspace, type StorageAdapter } from './theme.storage'
+import {
+  clearThemeWorkspace,
+  loadThemeWorkspace,
+  saveThemeWorkspace,
+  type StorageAdapter,
+} from './theme.storage'
 
 class MemoryStorage implements StorageAdapter {
   private values = new Map<string, string>()
@@ -11,6 +16,10 @@ class MemoryStorage implements StorageAdapter {
 
   setItem(key: string, value: string) {
     this.values.set(key, value)
+  }
+
+  removeItem(key: string) {
+    this.values.delete(key)
   }
 }
 
@@ -69,5 +78,18 @@ describe('theme storage', () => {
     })
 
     expect(loadThemeWorkspace(storage)?.activeProjectId).toBe(activeProject.id)
+  })
+
+  it('clears only the UI Forge workspace', () => {
+    const storage = new MemoryStorage()
+    storage.setItem('unrelated-preference', 'keep')
+    saveThemeWorkspace(storage, {
+      activeProjectId: 'project-1',
+      projects: [createThemeProject(undefined, { id: 'project-1' })],
+    })
+
+    expect(clearThemeWorkspace(storage)).toBe(true)
+    expect(loadThemeWorkspace(storage)).toBeNull()
+    expect(storage.getItem('unrelated-preference')).toBe('keep')
   })
 })

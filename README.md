@@ -2,6 +2,8 @@
 
 UI Forge is an interactive design-system laboratory for shaping visual tokens and testing them against a complete product interface in real time.
 
+**Prepared demo URL:** [angel-guiberteau.github.io/UI---Forge](https://angel-guiberteau.github.io/UI---Forge/)
+
 The project is built as a portfolio-grade frontend product rather than a collection of disconnected component examples. Every change is evaluated inside Northstar, a fictional operations application with navigation, dashboards, tables, forms, dialogs, feedback, and deliberately varied UI states.
 
 ## Objective
@@ -88,9 +90,22 @@ Browser data can be reset by clearing Local Storage for the application origin.
 npm run lint
 npm run test
 npm run build
+npm run build:pages
 ```
 
 The test suite prioritizes theme history, project persistence and migration, accessibility calculations, export formats, shared-link validation, dialogs, keyboard focus, and important specimen interactions.
+
+## Deployment
+
+The repository includes a GitHub Pages workflow that runs linting, the complete test suite, and a production build before publishing. It uses `/UI---Forge/` as the production base while keeping local development at `/`.
+
+To publish the prepared demo:
+
+1. Open the repository settings on GitHub.
+2. In **Pages**, select **GitHub Actions** as the build source.
+3. Push `main`, or run the deployment workflow manually from the **Actions** tab.
+
+The production artifact includes the branded 404 page, sitemap, robots file, social image, manifest, and hashed assets. The full product rationale is documented in [the case study](docs/CASE_STUDY.md).
 
 ## Technical decisions
 
@@ -102,7 +117,7 @@ The test suite prioritizes theme history, project persistence and migration, acc
 
 ## Project status
 
-Active portfolio project. The frontend product and developer-handoff flows are complete. Public deployment packaging and the final portfolio case study are the next release milestone.
+Release candidate. The frontend product, developer handoff, recovery states, deployment workflow, and portfolio case study are complete. Publishing only requires enabling GitHub Pages and pushing the prepared `main` branch.
 
 ## Author
 
