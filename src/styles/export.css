@@ -5,9 +5,8 @@
   display: grid;
   place-items: center;
   padding: 24px;
-  background: rgb(5 6 5 / 78%);
-  backdrop-filter: blur(12px) saturate(90%);
-  animation: dialog-fade-in 160ms ease both;
+  background: rgb(5 6 5 / 84%);
+  animation: dialog-fade-in var(--forge-motion-backdrop) ease-out both;
 }
 
 .export-dialog {
@@ -24,7 +23,7 @@
     radial-gradient(circle at 0% 0%, rgb(242 107 63 / 8%), transparent 28%),
     #171815;
   box-shadow: 0 38px 110px rgb(0 0 0 / 62%);
-  animation: dialog-rise-in 190ms cubic-bezier(0.2, 0.75, 0.2, 1) both;
+  animation: dialog-rise-in var(--forge-motion-dialog) var(--forge-motion-ease-out) both;
 }
 
 .export-dialog__header {
@@ -439,7 +438,7 @@
     z-index: 2;
     top: 0;
     min-height: 70px;
-    backdrop-filter: blur(14px);
+    background: #191a18;
   }
 
   .export-dialog__identity h2 {

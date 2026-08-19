@@ -23,6 +23,9 @@
   --forge-radius-lg: 18px;
   --forge-shadow-sm: 0 4px 14px rgb(0 0 0 / 18%);
   --forge-shadow-lg: 0 28px 80px rgb(0 0 0 / 34%);
+  --forge-motion-backdrop: 100ms;
+  --forge-motion-dialog: 140ms;
+  --forge-motion-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --forge-header-height: 76px;
 }
 
