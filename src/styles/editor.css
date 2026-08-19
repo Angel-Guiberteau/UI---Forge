@@ -793,13 +793,17 @@
   inset: 0;
   display: grid;
   place-items: center;
+  overflow-y: auto;
+  overscroll-behavior: contain;
   padding: 20px;
   background: rgb(5 6 5 / 82%);
-  animation: dialog-fade-in var(--forge-motion-backdrop) ease-out both;
 }
 
 .confirm-dialog {
   width: min(100%, 420px);
+  max-height: calc(100dvh - 40px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
   padding: 26px;
   border: 1px solid var(--forge-border-strong);
   border-radius: var(--forge-radius-lg);
@@ -861,12 +865,8 @@
   }
 }
 
-@keyframes dialog-fade-in {
-  from { opacity: 0; }
-}
-
 @keyframes dialog-rise-in {
-  from { opacity: 0; transform: translate3d(0, 6px, 0) scale(0.99); }
+  from { opacity: 0.82; transform: translate3d(0, 3px, 0) scale(0.995); }
 }
 
 @media (max-width: 700px) {

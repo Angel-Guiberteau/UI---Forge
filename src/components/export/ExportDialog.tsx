@@ -6,6 +6,7 @@ import {
   type ExportScope,
 } from '../../features/export/theme.export'
 import type { ThemeProject } from '../../features/theme/theme.types'
+import { useBodyScrollLock } from '../../hooks/useBodyScrollLock'
 import { Icon } from '../ui/Icon'
 
 type ExportDialogProps = {
@@ -37,6 +38,8 @@ export const ExportDialog = ({ open, project, onClose }: ExportDialogProps) => {
   const filename = createExportFilename(project.name, format)
   const lineCount = output.split('\n').length
   const sizeInKilobytes = new Blob([output]).size / 1024
+
+  useBodyScrollLock(open)
 
   useEffect(() => {
     if (!open) return

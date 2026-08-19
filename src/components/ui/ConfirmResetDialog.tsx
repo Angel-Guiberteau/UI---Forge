@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { useBodyScrollLock } from '../../hooks/useBodyScrollLock'
 import { Icon } from './Icon'
 
 type ConfirmResetDialogProps = {
@@ -16,6 +17,8 @@ export const ConfirmResetDialog = ({
 }: ConfirmResetDialogProps) => {
   const cancelButtonRef = useRef<HTMLButtonElement>(null)
   const confirmButtonRef = useRef<HTMLButtonElement>(null)
+
+  useBodyScrollLock(open)
 
   useEffect(() => {
     if (!open) {

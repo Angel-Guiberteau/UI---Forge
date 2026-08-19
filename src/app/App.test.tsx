@@ -127,11 +127,13 @@ describe('UI Forge workspace', () => {
     exportButton.focus()
     fireEvent.click(exportButton)
     expect(screen.getByRole('button', { name: 'Close export dialog' })).toHaveFocus()
+    expect(document.body.style.overflow).toBe('hidden')
 
     fireEvent.keyDown(document, { key: 'Escape' })
 
     expect(screen.queryByRole('dialog', { name: 'Export production tokens' })).not.toBeInTheDocument()
     expect(exportButton).toHaveFocus()
+    expect(document.body.style.overflow).toBe('')
   })
 
   it('navigates through the specimen and exposes project actions', () => {

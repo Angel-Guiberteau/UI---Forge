@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import type { ThemeProject } from '../../features/theme/theme.types'
+import { useBodyScrollLock } from '../../hooks/useBodyScrollLock'
 import { Icon } from '../ui/Icon'
 
 type LibraryView = 'active' | 'archived'
@@ -42,6 +43,8 @@ export const ProjectLibraryDialog = ({
     .sort((first, second) => second.updatedAt.localeCompare(first.updatedAt)), [projects, view])
   const activeCount = projects.filter((project) => project.archivedAt === null).length
   const archivedCount = projects.length - activeCount
+
+  useBodyScrollLock(open)
 
   useEffect(() => {
     if (!open) {

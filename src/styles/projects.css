@@ -4,9 +4,10 @@
   inset: 0;
   display: grid;
   place-items: center;
+  overflow-y: auto;
+  overscroll-behavior: contain;
   padding: 24px;
   background: rgb(5 6 5 / 84%);
-  animation: dialog-fade-in var(--forge-motion-backdrop) ease-out both;
 }
 
 .project-library {
@@ -15,6 +16,7 @@
   display: grid;
   grid-template-rows: auto auto minmax(0, 1fr) auto;
   overflow: hidden;
+  overscroll-behavior: contain;
   border: 1px solid var(--forge-border-strong);
   border-radius: var(--forge-radius-lg);
   color: var(--forge-text);
@@ -130,6 +132,7 @@
   min-height: 280px;
   overflow-x: hidden;
   overflow-y: auto;
+  overscroll-behavior: contain;
   padding: 20px;
 }
 
@@ -384,6 +387,9 @@
 
 .archive-confirm {
   width: min(100%, 430px);
+  max-height: calc(100dvh - 48px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
   padding: 26px;
   border: 1px solid var(--forge-border-strong);
   border-radius: var(--forge-radius-lg);
