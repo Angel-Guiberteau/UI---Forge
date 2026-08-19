@@ -129,7 +129,7 @@
     font-size: 0.67rem;
     font-weight: 720;
     cursor: pointer;
-    transition: border-color 120ms ease, background-color 120ms ease, transform 120ms ease;
+    transition: border-color var(--forge-motion-fast) ease-out, background-color var(--forge-motion-fast) ease-out, transform var(--forge-motion-fast) ease-out;
 
     &:hover {
       border-color: var(--forge-muted);

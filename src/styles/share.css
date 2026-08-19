@@ -24,6 +24,8 @@
     radial-gradient(circle at 8% 0%, rgb(255 59 48 / 9%), transparent 32%),
     #17171a;
   box-shadow: 0 38px 110px rgb(0 0 0 / 62%);
+  contain: layout paint;
+  will-change: transform, opacity;
   animation: dialog-rise-in var(--forge-motion-dialog) var(--forge-motion-ease-out) both;
 }
 
@@ -323,12 +325,11 @@
   font-size: 0.66rem;
   font-weight: 760;
   cursor: pointer;
-  transition: filter 120ms ease, transform 120ms ease, box-shadow 120ms ease;
+  transition: background-color var(--forge-motion-fast) ease-out, transform var(--forge-motion-fast) ease-out;
 
   &:hover {
     background: var(--forge-action-hover);
     transform: translateY(-1px);
-    box-shadow: 0 7px 20px rgb(255 59 48 / 18%);
   }
 
   &:active { transform: translateY(0); }
@@ -347,6 +348,8 @@
     radial-gradient(circle at 100% 0%, rgb(255 59 48 / 10%), transparent 30%),
     #19191c;
   box-shadow: 0 38px 110px rgb(0 0 0 / 62%);
+  contain: layout paint;
+  will-change: transform, opacity;
   animation: dialog-rise-in var(--forge-motion-dialog) var(--forge-motion-ease-out) both;
 }
 
@@ -534,6 +537,8 @@
   color: var(--forge-text);
   background: #20241f;
   box-shadow: 0 18px 48px rgb(0 0 0 / 48%);
+  contain: layout paint;
+  will-change: transform, opacity;
   animation: dialog-rise-in var(--forge-motion-dialog) var(--forge-motion-ease-out) both;
 
   > span {

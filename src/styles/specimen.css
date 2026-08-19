@@ -14,7 +14,6 @@
   font-weight: var(--font-weight-body);
   line-height: var(--line-height-body);
   box-shadow: 0 var(--shadow-offset-y) var(--shadow-blur) var(--shadow-spread) color-mix(in srgb, var(--shadow-color) calc(var(--shadow-opacity) * 100%), transparent);
-  transition: width 260ms cubic-bezier(0.2, 0.75, 0.2, 1), background-color 180ms ease, color 180ms ease, border-radius 180ms ease;
 
   &[data-viewport="tablet"] { width: min(100%, 740px); }
   &[data-viewport="mobile"] { width: min(100%, 390px); }
@@ -152,7 +151,7 @@
     font-size: 0.71em;
     text-align: left;
     cursor: pointer;
-    transition: color 150ms ease, background-color 150ms ease, border-color 150ms ease;
+    transition: color var(--forge-motion-fast) ease-out, background-color var(--forge-motion-fast) ease-out, border-color var(--forge-motion-fast) ease-out;
 
     &:hover { color: var(--color-text); background: var(--color-surface-elevated); }
     &[aria-current="page"] { border-color: color-mix(in srgb, var(--color-primary) 18%, var(--color-border)); color: var(--color-primary); background: color-mix(in srgb, var(--color-primary) 9%, transparent); font-weight: 700; }
@@ -244,7 +243,7 @@
   font-weight: 720;
   white-space: nowrap;
   cursor: pointer;
-  transition: filter 150ms ease, transform 150ms ease, box-shadow 150ms ease, background-color 150ms ease;
+  transition: transform var(--forge-motion-fast) ease-out, background-color var(--forge-motion-fast) ease-out;
 
   &:hover { transform: translateY(-1px); }
   &:active { transform: translateY(0); }
@@ -255,7 +254,7 @@
   color: var(--color-background);
   background: var(--color-primary);
 
-  &:hover { filter: brightness(1.08); box-shadow: 0 7px 18px color-mix(in srgb, var(--color-primary) 20%, transparent); }
+  &:hover { background: color-mix(in srgb, var(--color-primary) 90%, #000000); }
 }
 
 .specimen-button--secondary {
@@ -444,11 +443,12 @@
 
 .specimen-loading { display: grid; gap: calc(var(--space-unit) * 3); }
 .specimen-loading__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: calc(var(--space-unit) * 3); }
-.specimen-skeleton { min-height: 132px; border: 1px solid var(--color-border); border-radius: var(--radius-lg); background: linear-gradient(100deg, var(--color-surface) 20%, var(--color-surface-elevated) 40%, var(--color-surface) 60%); background-size: 220% 100%; animation: specimen-shimmer 1.5s ease-in-out infinite; }
+.specimen-skeleton { position: relative; min-height: 132px; overflow: hidden; border: 1px solid var(--color-border); border-radius: var(--radius-lg); background: var(--color-surface); contain: paint; }
+.specimen-skeleton::after { content: ""; position: absolute; inset: 0; background: linear-gradient(100deg, transparent 20%, var(--color-surface-elevated) 50%, transparent 80%); transform: translate3d(-100%, 0, 0); animation: specimen-shimmer 1.2s linear infinite; will-change: transform; }
 .specimen-skeleton--callout { min-height: 52px; border-radius: var(--radius-md); }
 .specimen-skeleton--table { min-height: 190px; }
 
-@keyframes specimen-shimmer { to { background-position-x: -220%; } }
+@keyframes specimen-shimmer { to { transform: translate3d(100%, 0, 0); } }
 
 .specimen-state {
   min-height: 360px;
@@ -492,6 +492,8 @@
   color: var(--color-text);
   background: var(--color-surface);
   box-shadow: 0 28px 80px color-mix(in srgb, var(--shadow-color) 35%, transparent);
+  contain: layout paint;
+  will-change: transform, opacity;
   animation: dialog-rise-in var(--forge-motion-dialog) var(--forge-motion-ease-out) both;
 }
 
@@ -542,7 +544,7 @@
 @media (prefers-reduced-motion: reduce) {
   .specimen,
   .specimen-button { transition: none; }
-  .specimen-skeleton { animation: none; }
+  .specimen-skeleton::after { animation: none; }
 }
 
 .specimen[data-viewport="tablet"] {
@@ -573,7 +575,7 @@
   .specimen-projects__toolbar { align-items: stretch; flex-direction: column; .specimen-button { width: 100%; } }
   .specimen-team li { grid-template-columns: auto 1fr; .specimen-team__capacity { grid-column: 2; } }
   .specimen-state { min-height: 360px; padding-inline: calc(var(--space-unit) * 4); }
-  .specimen-mobile-nav { position: absolute; z-index: 8; right: 0; bottom: 0; left: 0; min-height: 58px; display: grid; grid-template-columns: repeat(3, 1fr); padding: calc(var(--space-unit) * 1) calc(var(--space-unit) * 2); border-top: 1px solid var(--color-border); background: color-mix(in srgb, var(--color-surface) 96%, transparent); backdrop-filter: blur(12px); button { display: grid; place-items: center; gap: 1px; padding: calc(var(--space-unit) * 1); border: 0; border-radius: var(--radius-md); color: var(--color-text-muted); background: transparent; font-size: 0.52em; cursor: pointer; &[aria-current="page"] { color: var(--color-primary); background: color-mix(in srgb, var(--color-primary) 8%, transparent); } } }
+  .specimen-mobile-nav { position: absolute; z-index: 8; right: 0; bottom: 0; left: 0; min-height: 58px; display: grid; grid-template-columns: repeat(3, 1fr); padding: calc(var(--space-unit) * 1) calc(var(--space-unit) * 2); border-top: 1px solid var(--color-border); background: var(--color-surface); button { display: grid; place-items: center; gap: 1px; padding: calc(var(--space-unit) * 1); border: 0; border-radius: var(--radius-md); color: var(--color-text-muted); background: transparent; font-size: 0.52em; cursor: pointer; &[aria-current="page"] { color: var(--color-primary); background: color-mix(in srgb, var(--color-primary) 8%, transparent); } } }
   .specimen-dialog-backdrop { position: fixed; padding: calc(var(--space-unit) * 3); }
   .specimen-dialog { max-height: 88vh; }
   .specimen-form-row { grid-template-columns: 1fr; }
